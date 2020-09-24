@@ -15,5 +15,8 @@
 
 
 	현재시간 => <%= date.getHours() %> : <%= date.getMinutes() %> : <%= date.getSeconds() %>
+	
+	
+	test text add
 </body>
 </html>
