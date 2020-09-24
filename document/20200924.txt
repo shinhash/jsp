@@ -1,0 +1,8 @@
+서블릿 접속 방식
+
+1.  웹브라우저 주소줄에 주소 입력 + enter
+2. 버튼 : form - get
+              form - post
+3. link - get
+
+HTTP method : get, post
