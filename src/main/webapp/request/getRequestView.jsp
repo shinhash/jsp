@@ -15,7 +15,10 @@
 			$('#sendTest').on('click', function(){
 
 
-				way = $('input:radio:checked').val()
+				way = $('.doGetOrPost:checked').val()
+				
+				
+// 				alert(way)
 				$('#formTest').attr('action', '<%= request.getContextPath() %>/request/getFormWayTest.jsp');
 				$('#formTest').attr('method', way);
 				$('#formTest').submit();
@@ -86,8 +89,8 @@
 	<form id="formTest">
 	
 	
-		<input type="radio" value="get" name="posable" checked>get
-		<input type="radio" value="post" name="posable">post
+		<input class="doGetOrPost" type="radio" value="get" name="posable" checked>get
+		<input class="doGetOrPost" type="radio" value="post" name="posable">post
 	
 		<br>
 		<input type="button" value="send" id="sendTest">
