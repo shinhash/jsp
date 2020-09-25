@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// ¼­ºí¸´À» »ı¼ºÇÏ´Â ¹æ¹ı
-// 1. HttpServlet Å¬·¡½º¸¦ »ó¼ÓÇÑ´Ù.
-// 2. doXXX ¸Ş¼­µå¸¦ ±¸ÇöÇÑ´Ù.
-// 3. servletÀº Á¤Àû ÀÚ·á¿Í ´Ù¸£°Ô ÀÌ¸§ÀÌ ¾ø´Ù
-// 		localhost/ServletTest/index.html -> ºÒ°¡´É
-// 		url - ¼­ºí¸´ ¸ÅÇÎÇÏ´Â ÀÛ¾÷
-//		urlÀ» Á÷Á¢ ÀÌ¸§À» »ı¼ºÇØÁà¾ß ÇÑ´Ù.(web.xml)
+//ì„œë¸”ë¦¿ì„ ìƒì„±í•˜ëŠ” ë°©ë²•
+//1. HttpServlet í´ë˜ìŠ¤ë¥¼ ìƒì†í•œë‹¤.
+//2. doXXX ë©”ì„œë“œë¥¼ êµ¬í˜„í•œë‹¤.
+//3. servletì€ ì •ì  ìë£Œì™€ ë‹¤ë¥´ê²Œ ì´ë¦„ì´ ì—†ë‹¤
+//		localhost/ServletTest/index.html -> ë¶ˆê°€ëŠ¥
+//		url - ì„œë¸”ë¦¿ ë§¤í•‘í•˜ëŠ” ì‘ì—…
+//		urlì„ ì§ì ‘ ì´ë¦„ì„ ìƒì„±í•´ì¤˜ì•¼ í•œë‹¤.(web.xml)
 
 
 public class BasicServlet extends HttpServlet{
@@ -25,7 +25,7 @@ public class BasicServlet extends HttpServlet{
 
 //		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=utf-8");
-		// writer °´Ã¼¸¦ ÅëÇØ html ¹®¼­¸¦ »ı¼º
+		// writer ê°ì²´ë¥¼ í†µí•´ html ë¬¸ì„œë¥¼ ìƒì„±
 		PrintWriter writer = resp.getWriter();
 		
 		writer.print("<html>");
@@ -33,7 +33,7 @@ public class BasicServlet extends HttpServlet{
 		writer.print("	</head>");
 		writer.print("	<body>");
 		writer.print("		<p>");
-		writer.print("			ÇöÀç½Ã°£ : " + new Date());
+		writer.print("			í˜„ì¬ì‹œê°„ : " + new Date());
 		writer.print("		</p>");
 		writer.print("	</body>");
 		writer.print("</html>");
