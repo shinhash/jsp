@@ -8,7 +8,23 @@
 	<title>Insert title here</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
 
+		$(function(){
+
+			$('#sendTest').on('click', function(){
+
+
+				way = $('input:radio:checked').val()
+				$('#formTest').attr('action', '<%= request.getContextPath() %>/request/getFormWayTest.jsp');
+				$('#formTest').attr('method', way);
+				$('#formTest').submit();
+				
+			})
+
+		})
+	
+	</script>
 
 </head>
 <body>
@@ -34,14 +50,24 @@
 						
 	-->
 	
+	
+	<!-- 한글 파라미터 설정
+		get : server.xml <Connector URIEncoding="utf-8"
+		post : request.setCharacterEncoding("utf-8")
+				requset.getParameter() 메서드를 호출하기 전에 설정 해야함 -->
+	
 	<!-- action : 요청을 보낼 경로
 		 method : 요청 방식 (form 에서는 GET, POST 두가지만 가능하며 DEFAULT는 GET) 
 	-->
-	<form action="/jsp/request/getRequestResponse.jsp" method="GET">
-
-		user id : <input type="text" id="inputId1" name="userId" value="brown">
+	<form action="<%= request.getContextPath() %>/request/getRequestResponse.jsp" method="">
+	
+		<input type="radio" value="get" name="posable" checked>get
+		<input type="radio" value="post" name="posable">post
 		<br>
-		user id : <input type="text" id="inputId2" name="userId" value="sally">
+
+		user id : <input type="text" id="inputId1" name="userId" value="브라운">
+		<br>
+		user id : <input type="text" id="inputId2" name="userId" value="셀리">
 		<br>
 		password : <input type="password" id="inputPass" name="inputPass" value="pass1234">
 		<br>
@@ -50,6 +76,23 @@
 
 	</form>
 	
+	<br><br>
+	<br><br>
+	<br><br>
+	GET POST 두가지를 선택할 수 있는 라디오 버튼 생성
+	FORM 전송시 사용자가 GET, POST 방식을 지정할수 있도록 바꿔주는 기능
+	
+	<br><br>
+	<form id="formTest">
+	
+	
+		<input type="radio" value="get" name="posable" checked>get
+		<input type="radio" value="post" name="posable">post
+	
+		<br>
+		<input type="button" value="send" id="sendTest">
+		
+	</form>
 	
 	
 	
