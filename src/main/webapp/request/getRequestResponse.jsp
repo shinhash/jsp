@@ -5,6 +5,7 @@
     
 <%
 	String comWay = request.getParameter("posable");
+	request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
 </head>
 <body>
 
-	<h1><%= comWay.toUpperCase() %></h1>
+	<h1><%= request.getMethod() %></h1>
 	userId 파라미터는 brown, sally 두개를 보내지만 getParamater를 호출하면
 	첫번째 파라미터 값을 반환 <br>
 	request.getParameter("userId") : <%= request.getParameter("userId") %>
@@ -26,10 +27,10 @@
 	<%
 		String[] userIds = request.getParameterValues("userId");
 		for(int i=0; i<userIds.length; i++){
+			String temp = userIds[i];
 		%>
 		
-		<%= userIds[i] %>
-		
+		<%= temp %>
 		<%	
 		}
 	%><br><br>

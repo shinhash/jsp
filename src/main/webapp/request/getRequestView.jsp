@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +17,29 @@
 
 		$(function(){
 
-			$('#sendTest').on('click', function(){
+				$('#sendTest').on('click', function(){
+	
+	
+					way = $('.doGetOrPost:checked').val()
+					
+					$('#formTest').attr('action', '<%= request.getContextPath() %>/request/getFormWayTest.jsp');
+					$('#formTest').attr('method', way);
+					$('#formTest').submit();
+					
+				})
 
 
-				way = $('.doGetOrPost:checked').val()
+
+
+				$('#sendView').on('click', function(){
+
+					way = $('#formView1 :checked').val()
+					
+					$('#formView1').attr('action', '<%= request.getContextPath() %>/request/getRequestResponse.jsp');
+					$('#formView1').attr('method', way);
+					$('#formView1').submit();
 				
-				
-// 				alert(way)
-				$('#formTest').attr('action', '<%= request.getContextPath() %>/request/getFormWayTest.jsp');
-				$('#formTest').attr('method', way);
-				$('#formTest').submit();
-				
-			})
+				})
 
 		})
 	
@@ -62,7 +78,7 @@
 	<!-- action : 요청을 보낼 경로
 		 method : 요청 방식 (form 에서는 GET, POST 두가지만 가능하며 DEFAULT는 GET) 
 	-->
-	<form action="<%= request.getContextPath() %>/request/getRequestResponse.jsp" method="">
+	<form id="formView1" action="<%= request.getContextPath() %>/request/getRequestResponse.jsp" method="">
 	
 		<input type="radio" value="get" name="posable" checked>get
 		<input type="radio" value="post" name="posable">post
@@ -75,7 +91,7 @@
 		password : <input type="password" id="inputPass" name="inputPass" value="pass1234">
 		<br>
 		
-		<input type="submit" value="전송">
+		<input type="button" value="전송" id="sendView">
 
 	</form>
 	
