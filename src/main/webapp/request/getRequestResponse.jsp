@@ -5,7 +5,7 @@
     
 <%
 	request.setCharacterEncoding("UTF-8");
-	String comWay = request.getParameter("posable");
+// 	String comWay = request.getParameter("posable");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,9 +54,9 @@
 	%>	
 	
 	
-	요청 방식
+<!-- 	요청 방식 -->
 	<br>
-	<%= comWay.toUpperCase() %>
+<%-- 	<%= comWay.toUpperCase() %> --%>
 		
 
 </body>
