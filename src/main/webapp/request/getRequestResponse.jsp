@@ -4,8 +4,8 @@
     
     
 <%
-	String comWay = request.getParameter("posable");
 	request.setCharacterEncoding("UTF-8");
+	String comWay = request.getParameter("posable");
 %>
 <!DOCTYPE html>
 <html>
