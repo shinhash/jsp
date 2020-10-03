@@ -18,6 +18,8 @@ public class Gugudan extends HttpServlet{
 		
 		resp.setContentType("text/html; charset=utf-8");
 		
+		//test commit
+		
 		PrintWriter writer = resp.getWriter();
 		
 
