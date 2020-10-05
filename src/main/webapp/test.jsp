@@ -24,7 +24,7 @@
 	
 	
 	즉 두개의 리소스가 동일한 url을 갖는다<br>
-	이럴때 contextPath를 ㅣ우섲ㄴ시하여 처리 (not 중요)<br>
+	이럴때 contextPath를 우선시하여 처리 (not 중요)<br>
 
 	url만 보고서 경로에 나오는 path가 contextpath인지, webapp폴더 하위의 디렉토리 인지는 알수 없다.<br>	
 	

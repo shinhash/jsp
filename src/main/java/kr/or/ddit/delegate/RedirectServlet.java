@@ -33,6 +33,7 @@ public class RedirectServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 문자열 결합 조심 "redirectServlet" "doGet()"
+		// 서버측에 무리를 줄수 있다.
 //		logger.debug("redirectServlet.doGet()");
 		logger.debug("redirectServlet {} {}", "doGet()", "test");
 		

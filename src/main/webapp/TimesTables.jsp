@@ -16,6 +16,7 @@
 
 	<table border='1' align='center'>
 	<%
+	
 	for(int i=1; i<10; i++) {
 	%>
 		<tr>
