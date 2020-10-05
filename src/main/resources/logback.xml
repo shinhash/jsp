@@ -19,6 +19,11 @@
    </logger> 
    
    
+   <!-- logger name ==> 해당 logger가 사용될 package경로 -->
+   <logger name="CONTEXT_PATH" level="debug">
+       <appender-ref ref="STDOUT" />
+   </logger> 
+   
 <!--    <root level="DEBUG"> -->
 <!--        <appender-ref ref="STDOUT" /> -->
 <!--    </root> -->
