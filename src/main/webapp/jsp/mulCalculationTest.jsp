@@ -8,13 +8,11 @@
 </head>
 <body>
 
-
-	<form action="<%= request.getContextPath() %>/sumCalculation" method="post">
-		start : <input type="text" name="start" value="1"/><br>
-		end : <input type="text" name="end" value="10"/><br>
+	<form action="<%= request.getContextPath() %>/mulCalculation" method="post">
+		firstNum : <input type="text" name="firstNum" value="2"/><br>
+		secondNum : <input type="text" name="secondNum" value="12"/><br>
 		<input type="submit" value="send"/><br>
 	</form>
-	
 
 </body>
 </html>
