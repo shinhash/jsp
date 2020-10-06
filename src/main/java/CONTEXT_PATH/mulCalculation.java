@@ -44,7 +44,7 @@ public class mulCalculation extends HttpServlet {
 		}
 		
 		
-		int mulResult = firstNum * secondNum;
+		long mulResult = firstNum * secondNum;
 		logger.debug("mulResult = {}", mulResult);
 		
 		request.getSession().setAttribute("mulResult", mulResult);
