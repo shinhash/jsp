@@ -17,22 +17,32 @@ public class ScopeServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		// reqeust, session, application 객체에 각각 속성을 저장
-		
-		request.setAttribute("requestAttr", "reqeustValue");
-		
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("sessionAttr", "sessionValue");
-		
-		ServletContext sc = getServletContext();
-		sc.setAttribute("applicationAttr", "applicationValue");
-		
 		request.getRequestDispatcher("/jsp/ScopeView.jsp").forward(request, response);
 	}
 
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		// reqeust, session, application 객체에 각각 속성을 저장
+		
+		String param = request.getParameter("param");
+		
+		
+		
+		request.setAttribute("requestAttr", param);
+		
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("sessionAttr", param);
+		
+		ServletContext sc = getServletContext();
+		sc.setAttribute("applicationAttr", param);
+		
+		request.getRequestDispatcher("/jsp/ScopeView.jsp").forward(request, response);
+
+	}
 
 
 }
