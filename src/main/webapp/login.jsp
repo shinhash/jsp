@@ -28,26 +28,17 @@
 			
 			for(var i in cookies){
 				var cookieInfo = cookies[i].split("=")
-				if(cookieInfo[0] == cookieName){
-					return cookieInfo[1];
-				}
+				if(cookieInfo[0] == cookieName) return cookieInfo[1];
 			}
 			return ""
 		}
 
 		
 		function showCookieInfo(){
-			var userName = getCookieValue("USERNM");
-			var remember = getCookieValue("REMEMBERME");
-			var undefind = getCookieValue("NOTEXISTS_COOKIE");
-
-			console.log("USERNM = " + userName)
-			console.log("REMEMBERME = " + remember)
-			console.log("NOTEXISTS_COOKIE = " + undefind)
+			console.log("USERNM = " + getCookieValue("USERNM"))
+			console.log("REMEMBERME = " + getCookieValue("REMEMBERME"))
+			console.log("NOTEXISTS_COOKIE = " + getCookieValue("NOTEXISTS_COOKIE"))
 		}
-
-
-		
     </script>
     
     
