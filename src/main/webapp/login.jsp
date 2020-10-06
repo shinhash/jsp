@@ -24,20 +24,26 @@
     
     <script>
 		function getCookieValue(cookieName){
-			var cookies = document.cookie.split("; ")
-			
-			for(var i in cookies){
-				var cookieInfo = cookies[i].split("=")
-				if(cookieInfo[0] == cookieName) return cookieInfo[1];
+			var cookies = document.cookie.split("; ");
+			for(var info in cookies){
+				var cookie = cookies[info].split("=");
+				if(cookie[0] == cookieName) return cookie[1];
 			}
-			return ""
+			return "";
+		}
+
+
+		function getSession(){
+			var session = sessionStorage
+			alert(session)
 		}
 
 		
 		function showCookieInfo(){
-			console.log("USERNM = " + getCookieValue("USERNM"))
-			console.log("REMEMBERME = " + getCookieValue("REMEMBERME"))
-			console.log("NOTEXISTS_COOKIE = " + getCookieValue("NOTEXISTS_COOKIE"))
+// 			getSession();
+			console.log("USERNM = " + getCookieValue("USERNM"));
+			console.log("REMEMBERME = " + getCookieValue("REMEMBERME"));
+			console.log("NOTEXISTS_COOKIE = " + getCookieValue("NOTEXISTS_COOKIE"));
 		}
     </script>
     
