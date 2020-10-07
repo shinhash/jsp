@@ -1,4 +1,4 @@
-package kr.or.ddit.basic;
+package kr.or.ddit.cookie;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
