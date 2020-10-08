@@ -44,7 +44,7 @@
 
 					
 				}else{
-					$('#inputEmail').val("");
+// 					$('#inputEmail').val("");
 					Cookies.remove('REMEMBERME');
 					Cookies.remove('USERNM');
 				}
@@ -134,15 +134,15 @@
       <form id="loginForm" class="form-signin" action="<%= request.getContextPath() %>/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="userId" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="userId" value="brown" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="passBrown" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signIn">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="signIn">Sign in</button>
         <input class="btn btn-lg btn-primary btn-block" type="button" onclick="showCookieInfo()" value="showCookieInfo"/>
       </form>
 
