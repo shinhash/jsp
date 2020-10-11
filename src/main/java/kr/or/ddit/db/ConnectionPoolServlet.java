@@ -33,7 +33,7 @@ public class ConnectionPoolServlet extends HttpServlet{
 		bd.setPassword("java");
 		bd.setInitialSize(20);
 		
-		ServletContext sc = getServletContext();
+		ServletContext sc = getServletContext(); // application
 		sc.setAttribute("bd", bd);
 	}
 }
