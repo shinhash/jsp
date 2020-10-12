@@ -56,12 +56,12 @@ public class login extends HttpServlet {
 		
 		
 		// db에 등록된 회원이 없거나 비밀번호가 틀린 경우
-		if(memVO == null || !memVO.getPassword().equals(password)) {
+		if(memVO == null || !memVO.getPass().equals(password)) {
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 		// 비밀번호가 일치하는 경우 (메인페이지로 이동)
-		else if(memVO.getPassword().equals(password)) {
+		else if(memVO.getPass().equals(password)) {
 			request.getSession().setAttribute("S_MEMBER", memVO);
 			request.getRequestDispatcher("/main.jsp").forward(request, response);			
 		}

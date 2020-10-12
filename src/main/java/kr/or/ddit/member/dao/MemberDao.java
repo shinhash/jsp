@@ -1,5 +1,10 @@
 package kr.or.ddit.member.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
 public class MemberDao implements MemberDaoI {
@@ -13,11 +18,27 @@ public class MemberDao implements MemberDaoI {
 		//	Mock(가짜)
 		
 		
-		MemberVO memberVO = new MemberVO();
-		memberVO.setUserId("brown");
-		memberVO.setPassword("passBrown");
+//		MemberVO memberVO = new MemberVO();
+//		memberVO.setUserId("brown");
+//		memberVO.setPassword("passBrown");
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		// select
+		// 한건 : selectOne
+		// 여러건 : selectList
+		MemberVO memberVO =  sqlSession.selectOne("member.getMember", userId);
 		
 		return memberVO;
+	}
+
+	
+	
+	@Override
+	public List<MemberVO> selectAllMember() {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		List<MemberVO> memList = sqlSession.selectList("member.selectAllMember");
+		return memList;
 	}
 
 }

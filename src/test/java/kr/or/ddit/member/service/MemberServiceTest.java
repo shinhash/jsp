@@ -1,6 +1,9 @@
 package kr.or.ddit.member.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -18,8 +21,8 @@ public class MemberServiceTest {
 		String userId = "brown";
 		
 		MemberVO answerMemberVO = new MemberVO();
-		answerMemberVO.setUserId("brown");
-		answerMemberVO.setPassword("passBrown");
+		answerMemberVO.setUserid("brown");
+		answerMemberVO.setPass("brownPass");
 		
 		
 		/***When***/
@@ -32,4 +35,21 @@ public class MemberServiceTest {
 		
 		assertEquals(answerMemberVO, memberVO);
 	}
+	
+	
+	
+	@Test
+	public void selectAllMemberTest() {
+		/***Given***/
+		MemberServiceI memService = new MemberService();
+
+		/***When***/
+		List<MemberVO> memList =  memService.selectAllMember();
+		/***Then***/
+//		assertNotNull(memList);
+		assertEquals(5, memList.size());
+	}
+	
+	
+	
 }

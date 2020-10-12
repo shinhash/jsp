@@ -2,8 +2,12 @@ package kr.or.ddit.member.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
 public class MemberDaoTest {
@@ -16,8 +20,8 @@ public class MemberDaoTest {
 		String userId = "brown";
 		
 		MemberVO answerMemberVO = new MemberVO();
-		answerMemberVO.setUserId("brown");
-		answerMemberVO.setPassword("passBrown");
+		answerMemberVO.setUserid("brown");
+		answerMemberVO.setPass("brownPass");
 		
 		
 		
@@ -31,5 +35,28 @@ public class MemberDaoTest {
 		
 		assertEquals(answerMemberVO, memberVO);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Test
+	public void selectAllMemberTest() {
+		
+		/***Given***/
+		MemberDaoI memDao = new MemberDao();
 
+		/***When***/
+		List<MemberVO> memList = memDao.selectAllMember();
+		
+		/***Then***/
+		assertEquals(5, memList.size());
+		
+	}
+	
+	
 }
