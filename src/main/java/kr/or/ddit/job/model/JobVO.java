@@ -1,4 +1,4 @@
-package kr.or.ddit.member.model;
+package kr.or.ddit.job.model;
 
 public class JobVO {
 	

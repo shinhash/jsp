@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import kr.or.ddit.member.model.JobVO;
+import kr.or.ddit.job.dao.JobDao;
+import kr.or.ddit.job.dao.JobDaoI;
+import kr.or.ddit.job.model.JobVO;
+
 
 public class JobDaoTest {
 

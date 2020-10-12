@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.ddit.member.model.JobVO;
-import kr.or.ddit.member.service.JobService;
-import kr.or.ddit.member.service.JobServiceI;
+import kr.or.ddit.job.model.JobVO;
+import kr.or.ddit.job.service.JobService;
+import kr.or.ddit.job.service.JobServiceI;
+
 
 
 @WebServlet("/JobServlet")

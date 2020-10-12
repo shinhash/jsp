@@ -1,10 +1,11 @@
-package kr.or.ddit.member.service;
+package kr.or.ddit.job.service;
 
 import java.util.List;
 
-import kr.or.ddit.member.dao.JobDao;
-import kr.or.ddit.member.dao.JobDaoI;
-import kr.or.ddit.member.model.JobVO;
+import kr.or.ddit.job.dao.JobDao;
+import kr.or.ddit.job.dao.JobDaoI;
+import kr.or.ddit.job.model.JobVO;
+
 
 public class JobService implements JobServiceI {
 
