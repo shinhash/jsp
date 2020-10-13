@@ -21,7 +21,7 @@
     <link href="<%= request.getContextPath() %>/css/signin.css" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="<%= request.getContextPath() %>/js/js.cookie-2.2.1.min.js"></script>
+    <script type="text/javascript" src="<%= request.getContextPath() %>/js.cookie-2.2.1.min.js"></script>
     
     <script>
 
@@ -136,7 +136,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="userId" value="brown" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="passBrown" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="brownPass" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me

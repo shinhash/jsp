@@ -19,7 +19,7 @@
 
 <!-- <script src="/js/jquery/jquery-1.12.4.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/js/bootstrap.js"></script><!-- Custom styles for this template -->
+<%-- <script src="<%= request.getContextPath() %>/js/bootstrap.js"></script><!-- Custom styles for this template --> --%>
 
 <link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap core CSS -->
 <link href="<%= request.getContextPath() %>/css/dashboard.css" rel="stylesheet">
@@ -38,16 +38,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<% MemberVO memvo = (MemberVO)session.getAttribute("S_MEMBER"); %>
-			<%if(memvo != null){%>
-
-			<a class="navbar-brand" href="#">JSP/SPRING [ <%= memvo.getUserid() %> ]</a>
-			
-			<% }else{%>
-
-			<a class="navbar-brand" href="#">JSP/SPRING</a>
-				
-			<%} %>
+			<a class="navbar-brand" href="#">JSP/SPRING [ ${S_MEMBER.userid} ]</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
