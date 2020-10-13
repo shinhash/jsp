@@ -1,4 +1,4 @@
-package kr.or.ddit.member.service;
+package kr.or.ddit.job.service;
 
 import static org.junit.Assert.*;
 

@@ -20,7 +20,17 @@ import kr.or.ddit.member.service.MemberServiceI;
 public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(login.class);
-
+    
+    
+    private MemberServiceI memService;
+    
+    @Override
+    public void init() throws ServletException {
+    	// service 객체 생성
+    	memService = new MemberService();
+    }
+    
+    
 
 	// 로그인 화면을 클라이언트에게 응답으로 생성
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,11 +57,9 @@ public class login extends HttpServlet {
 		//	main페이지로 이동
 		// 불일치할 경우
 		//	login페이지로 이동
-		
-		
 		//public MemberVO getMember(String userId)
 		
-		MemberServiceI memService = new MemberService();
+		
 		MemberVO memVO = memService.getMember(userId);
 		
 		

@@ -9,7 +9,9 @@ import kr.or.ddit.member.model.MemberVO;
 
 public class MemberDao implements MemberDaoI {
 
-	
+	// insert, delete, update는
+	// sqlSession.commit()을 한뒤 ==> 변경내용 저장
+	// sqlSession.close()를 해야 한다. ==> 자원 반환
 	
 	@Override
 	public MemberVO getMember(String userId) {
@@ -28,7 +30,7 @@ public class MemberDao implements MemberDaoI {
 		// 한건 : selectOne
 		// 여러건 : selectList
 		MemberVO memberVO =  sqlSession.selectOne("member.getMember", userId);
-		
+		sqlSession.close();
 		return memberVO;
 	}
 
@@ -38,6 +40,7 @@ public class MemberDao implements MemberDaoI {
 	public List<MemberVO> selectAllMember() {
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		List<MemberVO> memList = sqlSession.selectList("member.selectAllMember");
+		sqlSession.close();
 		return memList;
 	}
 

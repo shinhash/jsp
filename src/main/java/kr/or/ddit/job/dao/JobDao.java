@@ -8,11 +8,13 @@ import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.job.model.JobVO;
 
 public class JobDao implements JobDaoI {
+	
 
 	@Override
 	public List<JobVO> getAllJabs() {
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		List<JobVO> jobList = sqlSession.selectList("job.getAllJobs");
+		sqlSession.close();
 		return jobList;
 	}
 

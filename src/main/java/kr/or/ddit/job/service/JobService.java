@@ -8,10 +8,16 @@ import kr.or.ddit.job.model.JobVO;
 
 
 public class JobService implements JobServiceI {
+	
+	private JobDaoI jobDao;
+	
+	public JobService() {
+		jobDao = new JobDao();
+	}
 
 	@Override
 	public List<JobVO> getAllJobs() {
-		JobDaoI jobDao = new JobDao();
+		
 		List<JobVO> jobList = jobDao.getAllJabs();
 		return jobList;
 	}

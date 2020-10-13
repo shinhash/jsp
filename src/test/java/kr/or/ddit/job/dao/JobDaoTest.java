@@ -1,4 +1,4 @@
-package kr.or.ddit.member.dao;
+package kr.or.ddit.job.dao;
 
 import static org.junit.Assert.*;
 
