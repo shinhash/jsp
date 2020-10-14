@@ -1,10 +1,10 @@
-<%@page import="kr.or.ddit.job.model.JobVO"%>
+<%@page import="kr.or.ddit.member.model.MemberVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	List<JobVO> jobList = (List<JobVO>) request.getAttribute("jobList");
+	List<MemberVO> memList = (List<MemberVO>) request.getAttribute("memList"); 
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,18 +31,21 @@
 
 <body>
 
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<%@ include file="/layout/header.jsp" %>
 	</nav>
+	
 	
 	<div class="container-fluid">
 		<div class="row">
 			<%@ include file="/layout/left.jsp" %>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<%@ include file="/layout/jobContent.jsp" %>
+				<%@ include file="/layout/commonLib.jsp" %>
 			</div>
 		</div>
 	</div>
+	
 	
 	
 </body>

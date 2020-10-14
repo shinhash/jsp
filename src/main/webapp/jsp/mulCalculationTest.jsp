@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form action="<%= request.getContextPath() %>/mulCalculation" method="post">
+	<form action="${pageContext.request.contextPath}/mulCalculation" method="post">
 		firstNum : <input type="text" name="firstNum" value="2"/><br>
 		secondNum : <input type="text" name="secondNum" value="12"/><br>
 		<input type="submit" value="send"/><br>

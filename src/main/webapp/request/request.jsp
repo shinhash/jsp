@@ -51,7 +51,7 @@
 
 		<tr>
 			<td>request.getContextPath()</td>
-			<td><%= request.getContextPath() %></td>
+			<td>${pageContext.request.contextPath}</td>
 		</tr>
 	</table>
 	

@@ -1,9 +1,19 @@
 package kr.or.ddit.member.model;
 
+import java.util.Date;
+
 public class MemberVO {
 
 	private String userid;
 	private String pass;
+	private String usernm;
+	private Date reg_dt;
+	private String alias;
+	
+	
+	
+	
+	
 	
 	public String getUserid() {
 		return userid;
@@ -22,9 +32,28 @@ public class MemberVO {
 	}
 	
 	
+	public String getUsernm() {
+		return usernm;
+	}
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
 	
 	
+	public Date getReg_dt() {
+		return reg_dt;
+	}
+	public void setReg_dt(Date reg_dt) {
+		this.reg_dt = reg_dt;
+	}
+
 	
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 	
 	
 	
@@ -58,8 +87,14 @@ public class MemberVO {
 			return false;
 		return true;
 	}
-
-
+	
+	
+	
+	@Override
+	public String toString() {
+		return "MemberVO [userid=" + userid + ", pass=" + pass + ", usernm=" + usernm + ", reg_dt=" + reg_dt
+				+ ", alias=" + alias + "]";
+	}
 	
 	
 }

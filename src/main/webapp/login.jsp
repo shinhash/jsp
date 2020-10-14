@@ -10,18 +10,18 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="<%= request.getContextPath() %>/icon/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/icon/favicon.ico">
 
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<%= request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<%= request.getContextPath() %>/css/signin.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="<%= request.getContextPath() %>/js.cookie-2.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/js.cookie-2.2.1.min.js"></script>
     
     <script>
 
@@ -131,7 +131,7 @@
 
     <div class="container">
 
-      <form id="loginForm" class="form-signin" action="<%= request.getContextPath() %>/login" method="post">
+      <form id="loginForm" class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="userId" value="brown" required autofocus>

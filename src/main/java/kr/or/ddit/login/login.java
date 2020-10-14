@@ -50,6 +50,8 @@ public class login extends HttpServlet {
 		logger.debug("userId = {}", userId);
 		logger.debug("password = {}", password);
 		
+		System.out.println(userId);
+		System.out.println(password);
 		
 		
 		// 파라미터로 온 userId가 db상에 존재하는지 확인하고, 비밀번호가 데이터베이스에 저장된 비밀번호와 일치하는지 확인

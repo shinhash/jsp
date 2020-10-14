@@ -10,7 +10,7 @@
 
 	el.jsp
 	
-	<form action="<%= request.getContextPath() %>/el" method="post">
+	<form action="${pageContext.request.contextPath}/el" method="post">
 		<% 
 			String scope = request.getParameter("scope");
 		

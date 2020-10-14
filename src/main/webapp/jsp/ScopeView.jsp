@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form action="<%= request.getContextPath() %>/ScopeServlet" method="post">
+	<form action="${pageContext.request.contextPath}/ScopeServlet" method="post">
 		<input type="text" name="param" />
 		<input type="submit" value="전송" />
 	</form>

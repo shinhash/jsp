@@ -22,7 +22,7 @@
 	
 					way = $('.doGetOrPost:checked').val()
 					
-					$('#formTest').attr('action', '<%= request.getContextPath() %>/request/getFormWayTest.jsp');
+					$('#formTest').attr('action', '${pageContext.request.contextPath}/request/getFormWayTest.jsp');
 					$('#formTest').attr('method', way);
 					$('#formTest').submit();
 					
@@ -35,7 +35,7 @@
 
 					way = $('#formView1 :checked').val()
 					
-					$('#formView1').attr('action', '<%= request.getContextPath() %>/request/getRequestResponse.jsp');
+					$('#formView1').attr('action', '${pageContext.request.contextPath}/request/getRequestResponse.jsp');
 					$('#formView1').attr('method', way);
 					$('#formView1').submit();
 				
@@ -78,7 +78,7 @@
 	<!-- action : 요청을 보낼 경로
 		 method : 요청 방식 (form 에서는 GET, POST 두가지만 가능하며 DEFAULT는 GET) 
 	-->
-	<form id="formView1" action="<%= request.getContextPath() %>/request/getRequestResponse.jsp" method="">
+	<form id="formView1" action="${pageContext.request.contextPath}/request/getRequestResponse.jsp" method="">
 	
 		<input type="radio" value="get" name="posable" checked>get
 		<input type="radio" value="post" name="posable">post
