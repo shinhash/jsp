@@ -74,9 +74,9 @@
 		map.put("name", "브라운");
 		map.put("id", "brown");
 		map.put("alias", "곰");
-		
 		request.setAttribute("map", map);
-		
+	%>	
+	<% 	
 		Set<String> keys = map.keySet();
 		Iterator<String> it = keys.iterator();
 		

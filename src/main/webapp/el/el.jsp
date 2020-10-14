@@ -27,6 +27,7 @@
 			else if(scope.equals("applicationValue")){
 				applicationVal = "checked";
 			}
+			scope = "";
 		%>		
 		<br>
 	
@@ -44,6 +45,7 @@
 	<br>
 	<br>
 	scope parameter : <%= request.getParameter("scope") %><br>
+	scope parameter : ${param}<br>
 	scope parameter : ${param.scope}<br>
 	<br>
 	<br>

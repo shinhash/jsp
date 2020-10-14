@@ -12,8 +12,11 @@
 <body>
 
 	<%
-		request.setAttribute("name", "brown");
+// 		request.setAttribute("name", "brown");
 	%>
+	<c:set var="name" value="brown"></c:set>
+	
+	
 	<c:if test="${name == 'sally'}">
 		sally
 	</c:if>

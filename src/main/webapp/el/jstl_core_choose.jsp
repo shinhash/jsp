@@ -10,8 +10,9 @@
 <body>
 
 	<%
-		request.setAttribute("name", "brown");
+// 		request.setAttribute("name", "brown");
 	%>
+	<c:set var="name" value="james"></c:set>
 
 	<c:choose>
 		<c:when test="${name == 'sally'}">sally</c:when>

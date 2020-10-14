@@ -39,20 +39,20 @@ public class ElServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String param = request.getParameter("scope");
-		logger.debug("scope = {}", param);
+		String params = request.getParameter("scope");
+		logger.debug("scope ==> {}", params);
 		
-		if(param.equals("requestValue")) {
-			request.setAttribute("attr", param);
+		if(params.equals("requestValue")) {
+			request.setAttribute("attr", params);
 			
-		}else if(param.equals("sessionValue")) {
-			request.setAttribute("attr", param);
-			request.getSession().setAttribute("attr", param);
+		}else if(params.equals("sessionValue")) {
+			request.setAttribute("attr", params);
+			request.getSession().setAttribute("attr", params);
 			
-		}else if(param.equals("applicationValue")) {
-			request.setAttribute("attr", param);
-			request.getSession().setAttribute("attr", param);
-			getServletContext().setAttribute("attr", param);
+		}else if(params.equals("applicationValue")) {
+			request.setAttribute("attr", params);
+			request.getSession().setAttribute("attr", params);
+			getServletContext().setAttribute("attr", params);
 			
 		}
 		
