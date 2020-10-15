@@ -44,4 +44,26 @@ public class MemberDao implements MemberDaoI {
 		return memList;
 	}
 
+
+
+	
+	
+	@Override
+	public List<MemberVO> selectMemberPage(int pageNum) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		List<MemberVO> memListPage = sqlSession.selectList("member.selectMemberPage", pageNum);
+		sqlSession.close();
+		return memListPage;
+	}
+
+
+
+	@Override
+	public int selectMemberTotalCnt() {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int totalCnt = sqlSession.selectOne("member.selectMemberTotalCnt");
+		sqlSession.close();
+		return totalCnt;
+	}
+
 }

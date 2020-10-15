@@ -9,5 +9,25 @@
 		SELECT *
 		FROM JOBS
 	</select>
+	
+	
+	<select id="selectJobsPage" parameterType="int" resultType="JobVO">
+		SELECT JOBINFO_B.*
+		FROM(
+		    SELECT ROWNUM AS RN, JOBINFO_A.*
+		    FROM (
+		            SELECT *
+		            FROM JOBS
+		            ORDER BY JOB_ID
+		          )JOBINFO_A
+		     )JOBINFO_B
+		WHERE RN BETWEEN ((#{pageNum} - 1) * 7 + 1) AND (#{pageNum} * 7)
+	</select>
+	
+	
+	<select id="selectJobsTotalCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM JOBS
+	</select>
 
 </mapper>

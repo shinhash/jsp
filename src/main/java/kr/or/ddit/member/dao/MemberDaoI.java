@@ -10,4 +10,8 @@ public interface MemberDaoI {
 	
 	
 	List<MemberVO> selectAllMember();
+	
+	List<MemberVO> selectMemberPage(int pageNum);
+	
+	int selectMemberTotalCnt();
 }

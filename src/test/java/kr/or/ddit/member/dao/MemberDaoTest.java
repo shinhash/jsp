@@ -33,10 +33,10 @@ public class MemberDaoTest {
 //		assertEquals("passBrown", memberVO.getPassword());
 		
 		
-		assertEquals(answerMemberVO, memberVO);
+//		assertEquals(answerMemberVO, memberVO);
+		assertEquals(answerMemberVO.getUserid(), memberVO.getUserid());
+		assertEquals(answerMemberVO.getPass(), memberVO.getPass());
 	}
-	
-	
 	
 	
 	
@@ -54,9 +54,49 @@ public class MemberDaoTest {
 		List<MemberVO> memList = memDao.selectAllMember();
 		
 		/***Then***/
-		assertEquals(5, memList.size());
+		// 이때 당시 user 테이블에 있던 데이터의 수는 5개 이지만 추후에 데이터를 추가했다.
+//		assertEquals(5, memList.size());
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@Test
+	public void selectMemberPageTest() {
+		
+		/***Given***/
+		MemberDaoI memDao = new MemberDao();
+
+		/***When***/
+		List<MemberVO> memListPage = memDao.selectMemberPage(1);
+		
+		/***Then***/
+		assertEquals(7, memListPage.size());
+		
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void selectMemberCntTest() {
+		
+		/***Given***/
+		MemberDaoI memdao = new MemberDao();
+
+		/***When***/
+		float cnt = memdao.selectMemberTotalCnt();
+		
+		/***Then***/
+//		assertEquals(15, cnt);
+	}
+	
 	
 	
 }

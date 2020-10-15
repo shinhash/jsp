@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
 	<div class="col-sm-8 blog-main">
-		<h2 class="sub-header">사용자</h2>
+		<h2 class="sub-header">JOBS</h2>
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
@@ -25,11 +25,14 @@
 
 		<div class="text-center">
 			<ul class="pagination">
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
+			
+				<c:forEach var="i" begin="1" end="${pageCnt}" step="1">
+					<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=${i}">${i}</a></li>			
+				</c:forEach>
+<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=2">2</a></li> --%>
+<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=3">3</a></li> --%>
+<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=4">4</a></li> --%>
+<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=5">5</a></li> --%>
 			</ul>
 		</div>
 	</div>

@@ -1,6 +1,8 @@
 package kr.or.ddit.member.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.member.dao.MemberDao;
 import kr.or.ddit.member.dao.MemberDaoI;
@@ -25,5 +27,24 @@ public class MemberService implements MemberServiceI {
 	public List<MemberVO> selectAllMember() {
 		return memDao.selectAllMember();
 	}
+
+
+	@Override
+	public Map<String, Object> selectMemberPage(int pageNum) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		List<MemberVO> memListPage = memDao.selectMemberPage(pageNum);
+		map.put("memListPage", memListPage);
+		
+		
+		int totalCnt = memDao.selectMemberTotalCnt();
+		int pageCnt = (int) Math.ceil(totalCnt / 7f);
+		map.put("pageCnt", pageCnt);
+		
+		return map;
+	}
+
 
 }

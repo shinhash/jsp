@@ -15,4 +15,28 @@
   	FROM users
   </select>
   
+  
+  <select id="selectMemberPage" parameterType="int" resultType="MemberVO">
+  	
+  	SELECT USERINFO_B.*
+	FROM(
+	    SELECT ROWNUM AS RN, USERINFO_A.*
+	    FROM (
+	            SELECT *
+	            FROM USERS
+	            ORDER BY USERID
+	          )USERINFO_A
+	     )USERINFO_B
+	WHERE RN between ((#{pageNum} - 1) * 7 + 1) AND (#{pageNum} * 7)
+  </select>
+  
+  
+  
+  <select id="selectMemberTotalCnt" resultType="int">
+  	SELECT COUNT(*)
+  	FROM USERS
+  </select>
+  
+  
+  
 </mapper>

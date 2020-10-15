@@ -18,4 +18,20 @@ public class JobDao implements JobDaoI {
 		return jobList;
 	}
 
+	@Override
+	public List<JobVO> getJobsPage(int pageNum) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		List<JobVO> jobListPage = sqlSession.selectList("job.selectJobsPage", pageNum);
+		sqlSession.close();
+		return jobListPage;
+	}
+
+	@Override
+	public int selectJobsTotalCnt() {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int totalCnt = sqlSession.selectOne("job.selectJobsTotalCnt");
+		sqlSession.close();
+		return totalCnt;
+	}
+
 }
