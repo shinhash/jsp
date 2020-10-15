@@ -21,7 +21,7 @@
 			</table>
 		</div>
 
-		<a class="btn btn-default pull-right">사용자 등록</a>
+		<a class="btn btn-default pull-right">직업 등록</a>
 
 		<div class="text-center">
 			<ul class="pagination">
@@ -29,10 +29,6 @@
 				<c:forEach var="i" begin="1" end="${pageCnt}" step="1">
 					<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=${i}">${i}</a></li>			
 				</c:forEach>
-<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=2">2</a></li> --%>
-<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=3">3</a></li> --%>
-<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=4">4</a></li> --%>
-<%-- 				<li><a href="${pageContext.request.contextPath}/JobServlet?pageNum=5">5</a></li> --%>
 			</ul>
 		</div>
 	</div>
