@@ -49,9 +49,10 @@ public class JobServlet extends HttpServlet {
 		int pageCnt = (int) jobMap.get("pageCnt");
 		
 		logger.debug("pageCnt = {}", pageCnt);
-		
-		request.setAttribute("jobList", jobListPage);
+
+		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCnt", pageCnt);
+		request.setAttribute("jobList", jobListPage);
 		request.getRequestDispatcher("/jsp/getAllJobs.jsp").forward(request, response);
 	}
 }

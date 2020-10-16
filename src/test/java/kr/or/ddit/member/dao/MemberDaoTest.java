@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
@@ -70,10 +71,16 @@ public class MemberDaoTest {
 	public void selectMemberPageTest() {
 		
 		/***Given***/
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		MemberDaoI memDao = new MemberDao();
-
+		
+		PageVO pageInfo = new PageVO();
+		pageInfo.setPageNum(1);
+		pageInfo.setPageSize(7);
+		
 		/***When***/
-		List<MemberVO> memListPage = memDao.selectMemberPage(1);
+		List<MemberVO> memListPage = memDao.selectMemberPage(pageInfo, sqlSession);
+		sqlSession.close();
 		
 		/***Then***/
 		assertEquals(7, memListPage.size());
@@ -88,10 +95,12 @@ public class MemberDaoTest {
 	public void selectMemberCntTest() {
 		
 		/***Given***/
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		MemberDaoI memdao = new MemberDao();
 
 		/***When***/
-		float cnt = memdao.selectMemberTotalCnt();
+		float cnt = memdao.selectMemberTotalCnt(sqlSession);
+		sqlSession.close();
 		
 		/***Then***/
 //		assertEquals(15, cnt);

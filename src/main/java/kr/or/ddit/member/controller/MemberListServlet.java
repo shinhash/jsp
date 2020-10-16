@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
@@ -38,13 +39,20 @@ public class MemberListServlet extends HttpServlet {
 		
 		MemberServiceI memService = new MemberService();
 		
-		Map<String, Object> memMap = memService.selectMemberPage(pageNum);
 		
+		PageVO pageVO = new PageVO(pageNum, 9);
+//		pageInfo.setPageNum(pageNum);
+//		pageInfo.setPageSize(6);
+		
+		
+		Map<String, Object> memMap = memService.selectMemberPage(pageVO);
+		
+		List<MemberVO> memListPage = (List<MemberVO>) memMap.get("memListPage");
 		int pageCnt = (Integer)memMap.get("pageCnt");
 		logger.debug("pageCnt = {}", pageCnt);
-		List<MemberVO> memListPage = (List<MemberVO>) memMap.get("memListPage");
 		
 		
+		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("memList", memListPage);
 		request.getRequestDispatcher("/member/memberList.jsp").forward(request, response);

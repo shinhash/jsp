@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
+import kr.or.ddit.common.model.PageVO;
+import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.dao.MemberDao;
 import kr.or.ddit.member.dao.MemberDaoI;
 import kr.or.ddit.member.model.MemberVO;
@@ -30,18 +34,23 @@ public class MemberService implements MemberServiceI {
 
 
 	@Override
-	public Map<String, Object> selectMemberPage(int pageNum) {
+	public Map<String, Object> selectMemberPage(PageVO pageVO) {
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		List<MemberVO> memListPage = memDao.selectMemberPage(pageVO, sqlSession);
+		int totalCnt = memDao.selectMemberTotalCnt(sqlSession);
+		
+		
+		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		
-		List<MemberVO> memListPage = memDao.selectMemberPage(pageNum);
+
 		map.put("memListPage", memListPage);
-		
-		
-		int totalCnt = memDao.selectMemberTotalCnt();
-		int pageCnt = (int) Math.ceil(totalCnt / 7f);
+		int pageCnt = (int) Math.ceil(totalCnt / ((float)pageVO.getPageSize()));
 		map.put("pageCnt", pageCnt);
+		
+		sqlSession.close();
 		
 		return map;
 	}

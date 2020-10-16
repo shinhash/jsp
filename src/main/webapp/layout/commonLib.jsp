@@ -41,7 +41,14 @@
 			<ul class="pagination">
 			
 				<c:forEach var="i" begin="1" end="${pageCnt}" step="1">
-					<li><a href="${pageContext.request.contextPath}/memberList?pageNum=${i}">${i}</a></li>
+					<c:choose>
+						<c:when test="${pageNum == i}">
+							<li class="active"><span>${i}</span></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="${pageContext.request.contextPath}/memberList?pageNum=${i}">${i}</a></li>						
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</ul>
 		</div>

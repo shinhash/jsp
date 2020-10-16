@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.member.dao.MemberDao;
 import kr.or.ddit.member.model.MemberVO;
 
@@ -78,28 +80,28 @@ public class MemberServiceTest {
 		
 		/***Given***/
 		MemberServiceI memService = new MemberService();
+		
+		PageVO pageVO = new PageVO(1, 7);
+//		PageVO pageVO = new PageVO();
+//		pageInfo.setPageNum(1);
+//		pageInfo.setPageSize(7);
 
+		
 		/***When***/
-//		List<MemberVO> memListPage = memService.selectMemberPage(1);
+		Map<String, Object> map = memService.selectMemberPage(pageVO);
+		
+		// memberList 확인
+		List<MemberVO> memListPage = (List<MemberVO>) map.get("memListPage");
+		
+		
+		// member의 전체 수 확인
+		int pageCnt = (int) map.get("pageCnt");
 		
 		/***Then***/
-//		assertEquals(7, memListPage.size());
+		assertEquals(7, memListPage.size());
+		assertEquals(3, pageCnt);
 	}
-	
-	
-	
-	
-	@Test
-	public void test() {
-		/***Given***/
-		
 
-		/***When***/
-		logger.debug("{}", Math.ceil(15/7f));
-		
-		/***Then***/
-	}
-	
 	
 	
 	
