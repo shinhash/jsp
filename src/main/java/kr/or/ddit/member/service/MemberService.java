@@ -36,6 +36,9 @@ public class MemberService implements MemberServiceI {
 	@Override
 	public Map<String, Object> selectMemberPage(PageVO pageVO) {
 		
+		
+		// 동일한 SqlSession 정보를 인자로 전달하여 같은 트렌젝션안에서 처리하도록 한다.
+		// 같은 공간에서 작업
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		List<MemberVO> memListPage = memDao.selectMemberPage(pageVO, sqlSession);
 		int totalCnt = memDao.selectMemberTotalCnt(sqlSession);
