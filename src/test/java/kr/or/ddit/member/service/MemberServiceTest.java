@@ -3,7 +3,9 @@ package kr.or.ddit.member.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Test;
@@ -103,6 +105,16 @@ public class MemberServiceTest {
 	}
 
 	
+	
+	
+	@Test
+	public void localeListTest() {
+		Locale[] locales = SimpleDateFormat.getAvailableLocales();
+		
+		for(Locale locale : locales) {
+			logger.debug("locale = {}", locale);
+		}
+	}
 	
 	
 }
