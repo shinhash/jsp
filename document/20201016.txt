@@ -25,3 +25,7 @@ JSTL 국제화
 국제화 코드 => i18n
 
 internationalization => i nternationalizatio(18글자) n
+
+
+
+

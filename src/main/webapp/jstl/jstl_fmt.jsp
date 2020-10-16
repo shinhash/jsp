@@ -12,7 +12,8 @@
 <script src="${pageContext.request.contextPath}/js/js.cookie-2.2.1.min.js"></script>
 <script>
 	$(function(){
-		
+
+
 		if(Cookies.get("lang") == null){
 			Cookies.set("lang", "ko")
 			$("#selectBox option[id=ko]").prop("selected", true)
@@ -26,6 +27,10 @@
 			Cookies.set("lang", lang)
 			url = "<%= request.getContextPath() %>/jstl/jstl_fmt.jsp?";
 			document.location.href = url + "lang=" + lang;
+
+// 			$("#langForm").attr("action", "/jstl/jstl_fmt.jsp");
+// 			$("#langForm").attr("method", "post");
+// 			$("#langForm").submit();
 		})
 
 
