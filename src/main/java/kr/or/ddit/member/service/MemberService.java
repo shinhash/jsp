@@ -37,15 +37,11 @@ public class MemberService implements MemberServiceI {
 	public Map<String, Object> selectMemberPage(PageVO pageVO) {
 		
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
-		
 		List<MemberVO> memListPage = memDao.selectMemberPage(pageVO, sqlSession);
 		int totalCnt = memDao.selectMemberTotalCnt(sqlSession);
 		
 		
-		
-		
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		map.put("memListPage", memListPage);
 		int pageCnt = (int) Math.ceil(totalCnt / ((float)pageVO.getPageSize()));
 		map.put("pageCnt", pageCnt);
