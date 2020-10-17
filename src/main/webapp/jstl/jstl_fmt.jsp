@@ -13,24 +13,35 @@
 <script>
 	$(function(){
 
-
-		if(Cookies.get("lang") == null){
-			Cookies.set("lang", "ko")
+		lang = '<%= request.getParameter("lang") %>'
+<%-- var lang = "<c:out value='${param.lang}' />"; --%>
+		console.log("lang = " + lang)
+		if(lang == null){
 			$("#selectBox option[id=ko]").prop("selected", true)
 		}else{
-			$("#selectBox option[id="+Cookies.get("lang")+"]").prop("selected", true)
+			$("#selectBox option[id="+lang+"]").prop("selected", true)
 		}
+
+		
+		//  cookies setting
+// 		if(Cookies.get("lang") == null){
+// 			Cookies.set("lang", "ko")
+// 			$("#selectBox option[id=ko]").prop("selected", true)
+// 		}else{
+// 			$("#selectBox option[id="+Cookies.get("lang")+"]").prop("selected", true)
+// 		}
 
 		$("#selectBox").on("change", function(){
 
-			lang = $("#selectBox option:selected").attr("id");
-			Cookies.set("lang", lang)
-			url = "<%= request.getContextPath() %>/jstl/jstl_fmt.jsp?";
-			document.location.href = url + "lang=" + lang;
+// 			lang = $("#selectBox option:selected").attr("id");
+			
+// 			Cookies.set("lang", lang)
+<%-- 			url = "<%= request.getContextPath() %>/jstl/jstl_fmt.jsp?"; --%>
+// 			document.location.href = url + "lang=" + lang;
 
-// 			$("#langForm").attr("action", "/jstl/jstl_fmt.jsp");
-// 			$("#langForm").attr("method", "post");
-// 			$("#langForm").submit();
+			$("#langForm").attr("action", "/jstl/jstl_fmt.jsp");
+			$("#langForm").attr("method", "get");
+			$("#langForm").submit();
 		})
 
 
@@ -97,11 +108,10 @@
 	<form id="langForm">
 	select language :
 		<select id="selectBox" name="lang">
-		
 			
-			<option id="ko">korea</option>
-			<option id="en">english</option>
-			<option id="ja">japan</option>
+			<option id="ko" value="ko">korea</option>
+			<option id="en" value="en">english</option>
+			<option id="ja" value="ja">japan</option>
 			
 		</select>
 	
