@@ -13,14 +13,15 @@
 <script>
 	$(function(){
 
-		lang = '<%= request.getParameter("lang") %>'
+<%-- 		lang = '<%= request.getParameter("lang") %>' --%>
 <%-- var lang = "<c:out value='${param.lang}' />"; --%>
-		console.log("lang = " + lang)
-		if(lang == null){
-			$("#selectBox option[id=ko]").prop("selected", true)
-		}else{
-			$("#selectBox option[id="+lang+"]").prop("selected", true)
-		}
+// 		console.log("lang = " + lang)
+// 		if(lang == null){
+// 			$("#selectBox option[id=ko]").prop("selected", true)
+// 		}else{
+// 			$("#selectBox option[id="+lang+"]").prop("selected", true)
+// 		}
+		$("#selectBox").val("${param.lang == null ? 'ko' : param.lang}")
 
 		
 		//  cookies setting
@@ -34,7 +35,8 @@
 		$("#selectBox").on("change", function(){
 
 // 			lang = $("#selectBox option:selected").attr("id");
-			
+// 			lang = $("#selectBox").val()
+
 // 			Cookies.set("lang", lang)
 <%-- 			url = "<%= request.getContextPath() %>/jstl/jstl_fmt.jsp?"; --%>
 // 			document.location.href = url + "lang=" + lang;
