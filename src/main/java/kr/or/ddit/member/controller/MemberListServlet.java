@@ -3,6 +3,7 @@ package kr.or.ddit.member.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,11 +41,11 @@ public class MemberListServlet extends HttpServlet {
 		MemberServiceI memService = new MemberService();
 		
 		
-		PageVO pageVO = new PageVO(pageNum, 9);
+		PageVO pageVO = new PageVO(pageNum, 5);
 //		pageInfo.setPageNum(pageNum);
 //		pageInfo.setPageSize(6);
 		
-		
+//		TimeZone.getAvailableIDs();
 		Map<String, Object> memMap = memService.selectMemberPage(pageVO);
 		
 		List<MemberVO> memListPage = (List<MemberVO>) memMap.get("memListPage");
