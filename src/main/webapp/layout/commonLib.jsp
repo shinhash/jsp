@@ -28,7 +28,8 @@
 					<td>${member.usernm}</td>
 					<td>${member.alias}</td>
 					
-					<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd HH:mm" /> </td>
+					<td><fmt:formatDate value="${member.reg_dt }" /> </td>
+<%-- 					<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd HH:mm" /> </td> --%>
 <%-- 					<td>${(member.reg_dt)}</td> --%>
 				</tr>
 				</c:forEach>
