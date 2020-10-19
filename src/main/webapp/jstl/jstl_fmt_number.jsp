@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<fmt:setLocale value="de_DE" />
+	<fmt:setLocale value="ko_KR" />
 	<%
 		// <c:set var="price" value="100000"/>
 	request.setAttribute("price", 100000);

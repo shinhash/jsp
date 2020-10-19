@@ -33,7 +33,7 @@
 	<%
 		request.setAttribute("nowStr", "2020-10-19 10:15");
 	%>
-	<fmt:parseDate value="${nowStr }" pattern="yyyy-MM-dd HH:mm" />
+	<fmt:parseDate value="${nowStr }" pattern="yyyy-MM-dd HH:mm" /><br>
 	
 	
 	
