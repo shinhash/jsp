@@ -8,3 +8,25 @@
 HTTP method : get, post
 
 테스트용 추가 작성
+
+
+
+
+
+
+tomcat is not was
+
+beacause :
+was에는 jsp,servlet 컨테이너와 ejb가 포함되어있는것을 칭한다.
+하지만 tomcat은 ejb가 없으므로 jsp/servlet 컨테이너라고 불린다.
+
+was 종류
+이름				회사
+tomcat		- apache
+jeus		- tmax
+weblogic	- oracle
+jboss		- 레드헷(리눅스)
+
+
+
+
