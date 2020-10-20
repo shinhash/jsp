@@ -72,9 +72,13 @@ public class RequestCounterFilter implements Filter{
 		
 		
 		
-		// 전처리
+		// 전처리 : 요청이 서블릿으로 가기전에 실행되는 부분
+		logger.debug("RequestCounterFilter 전처리 부분 - chain.doFilter 호출전");
+		
 		chain.doFilter(request, response); // servlet || filter 처리
-		// 후처리
+		
+		// 후처리 : servlet 응답생성후 응답이 웹브라우저로 가는 단계에서 후속처리
+		logger.debug("RequestCounterFilter 후처리 부분 - chain.doFilter 호출후");
 		
 	}
 
