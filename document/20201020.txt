@@ -36,7 +36,7 @@ log info
 
 
 
-Wrapper
+Wrapper : 기본자료형을 객체형으로 감싼 클래스
 int ==> Integer
 
 HttpServletRequest ==> 새로운 객체로 생성

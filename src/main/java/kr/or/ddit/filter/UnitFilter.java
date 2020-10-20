@@ -27,8 +27,6 @@ public class UnitFilter implements Filter {
 		// UNT_CD 파라미터를 새롭게 추가
 		req.setUnit();
 		
-		
-		
 		chain.doFilter(req, response);
 //		chain.doFilter(request, response);
 	}
