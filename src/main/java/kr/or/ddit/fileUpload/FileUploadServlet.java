@@ -29,14 +29,29 @@ public class FileUploadServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// fileUpload url요청(get)
+		// 접속
+		// /fileUpload/uploadView.jsp 해당 경로로 요청을 위임
+		
+		
 		logger.debug("get request.getContentType() : {}", request.getContentType());
 		request.getRequestDispatcher("/fileUpload/uploadView.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-//		request.setCharacterEncoding("UTF-8");
+		
+		// form 데이터를 받는다.
+		// form데이터에서 userid, img 정보를 받는다.
+		// userid는 parameter로 받는다.
+		// img는 Part객체로 받는다.(file을 담을수 있는 객체)
+		// 해당 img태그의 image파일의 해더정보를 통해서 파일의 이름을 추출한다.
+		// 추출한 이름을 가지고 해당경로에 파일을 생성(저장)한다.
+		// 해당 파일의 사이즈가 maxFileSize의 크기를 초과할 경우에는 브라우져상에서 임시저장이 된다.
+		// 이때 임시저장된 파일이 기록에 남으므로 기존의 데이터를 삭제하는 Part객체의 delete() 메서드를 호출하여 객체를 삭제한다.
+		
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		logger.debug("post request.getContentType() : {}", request.getContentType());
 		

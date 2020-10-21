@@ -40,6 +40,7 @@
 
 
 				<form class="form-horizontal" role="form">
+				
 <!-- 					<div class="form-group"> -->
 <!-- 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label> -->
 <!-- 						<div class="col-sm-10"> -->
@@ -54,8 +55,8 @@
 					<div class="form-group">
 						<label for="req_dt" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-<%-- 							<label class="control-label"><img src="${cp }/profile/${memVO.filename }" alt="사진"/></label> --%>
-							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label>
+							<label class="control-label"><img src="${cp }/profile/${memVO.filename }" alt="사진"/></label>
+<%-- 							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label> --%>
 						</div>
 					</div>
 					
@@ -96,7 +97,7 @@
 					
 					
 					<div class="form-group">
-						<label for="addr1" class="col-sm-2 control-label">주소1</label>
+						<label for="addr1" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
 							<label class="control-label">${memVO.addr1 }</label>
 						</div>
@@ -141,6 +142,10 @@
 <!-- 							<button type="submit" class="btn btn-default">사용자 등록</button> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
+
+
+
+
 				</form>
 			</div>
 		</div>
