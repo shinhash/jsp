@@ -37,6 +37,9 @@ public class SessionAttributeListener implements HttpSessionAttributeListener{
 			logger.debug("사용자 로그인 : {}", memVO.getUserid());
 			userMap.put(memVO.getUserid(), memVO); 
 			ServletContext sc = event.getSession().getServletContext();
+			
+			// map이 아닌 map의 주소를 참조하여 해당 map을 setAttribute한 것
+			// 값이 아니라 주소를 갖는 attribute
 			sc.setAttribute("userMap", userMap);
 		}
 	}
@@ -57,8 +60,14 @@ public class SessionAttributeListener implements HttpSessionAttributeListener{
 		if("S_MEMBER".equals(event.getName())) {
 			MemberVO memVO = (MemberVO) event.getValue();
 			userMap.remove(memVO.getUserid());
-			ServletContext sc = event.getSession().getServletContext();
-			sc.setAttribute("userMap", userMap);
+			
+			// userMap의 주소에 있는 memVO.getUserid() 와 일치하는 key값의 정보를 삭제하기 때문에
+			// userMap 주소의 데이터를 참조하는 application단의 데이터가 수정된다.
+			// map 주소에 있는 데이터를 삭제했기 때문에 해당 map을 참조하는 곳에까지 영향이 미침
+			
+			
+//			ServletContext sc = event.getSession().getServletContext();
+//			sc.setAttribute("userMap", userMap);
 		}
 	}
 
