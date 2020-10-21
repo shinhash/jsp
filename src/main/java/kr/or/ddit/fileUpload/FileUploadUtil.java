@@ -20,7 +20,8 @@ public class FileUploadUtil {
 		for(String parsed : parsingString) {
 			if(!parsed.equals("form-data")) {
 				String[] temp = parsed.split("=");
-				parseMap.put(temp[0], temp[1].split("\"")[1]);
+//				parseMap.put(temp[0], temp[1].split("\"")[1]);
+				parseMap.put(temp[0], temp[1].replaceAll("\"", ""));
 			}
 		}
 		

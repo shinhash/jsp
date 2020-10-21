@@ -15,5 +15,4 @@ public interface MemberServiceI {
 	
 	Map<String, Object> selectMemberPage(PageVO pageVO);
 	
-
 }

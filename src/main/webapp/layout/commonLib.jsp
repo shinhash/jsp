@@ -11,6 +11,27 @@
 <link href="${cp}/css/blog.css?v=2" rel="stylesheet">
 
 
+<script>
+	$(document).ready(function(){
+		$("#memberInfo tr").on("click", function(){
+			var userid = $(this).data("userid")
+			console.log("userid = " + userid)
+			document.location = "/memberInfo?userid=" + userid;
+		})
+	})
+	
+	
+	
+// 	$(function(){
+// 		$("#memberInfo tr").on("click", function(){
+// 			userid = $(this).attr("data-userid")
+// 		})
+// 	})
+	
+</script>
+
+
+
 <div class="row">
 	<div class="col-sm-8 blog-main">
 		<h2 class="sub-header">사용자</h2>
@@ -22,17 +43,20 @@
 					<th>사용자 별명</th>
 					<th>등록일시</th>
 				</tr>
-				<c:forEach items="${memList}" var="member">
-				<tr>
-					<td>${member.userid}</td>
-					<td>${member.usernm}</td>
-					<td>${member.alias}</td>
-					
-					<td><fmt:formatDate value="${member.reg_dt }" /> </td>
-<%-- 					<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd HH:mm" /> </td> --%>
-<%-- 					<td>${(member.reg_dt)}</td> --%>
-				</tr>
-				</c:forEach>
+				
+				<tbody id="memberInfo">
+					<c:forEach items="${memList}" var="member">
+					<tr data-userid="${member.userid}">
+						<td>${member.userid}</td>
+						<td>${member.usernm}</td>
+						<td>${member.alias}</td>
+						<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd HH:mm" /> </td>
+	<%-- 					<td><fmt:formatDate value="${member.reg_dt }" /> </td> --%>
+	<%-- 					<td>${(member.reg_dt)}</td> --%>
+					</tr>
+					</c:forEach>
+				
+				</tbody>
 				
 				
 			</table>
