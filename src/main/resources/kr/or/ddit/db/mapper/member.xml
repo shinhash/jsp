@@ -27,7 +27,7 @@
 	            ORDER BY USERID
 	          )USERINFO_A
 	     )USERINFO_B
-	WHERE RN between ((#{pageNum} - 1) * ${pageSize} + 1) AND (#{pageNum} * ${pageSize})
+	WHERE RN between ((#{pageNum} - 1) * #{pageSize} + 1) AND (#{pageNum} * #{pageSize})
   </select>
   
   
@@ -36,6 +36,39 @@
   	SELECT COUNT(*)
   	FROM USERS
   </select>
+  
+  
+  
+  <insert id="insertMember" parameterType="MemberVO">
+  	INSERT INTO USERS VALUES(#{userid}, #{usernm}, #{pass}, SYSDATE, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename}, #{realfilename})
+  </insert>
+  
+  
+  <delete id="deleteMember" parameterType="String">
+	DELETE USERS
+	WHERE userid = #{userid}  
+  </delete>
+  
+  
+  
+  <update id="updateMember" parameterType="MemberVO">
+  	UPDATE USERS
+  	SET
+  	usernm = #{usernm},
+  	pass = #{pass},
+  	reg_dt = SYSDATE,
+  	alias = #{alias},
+  	addr1 = #{addr1},
+  	addr2 = #{addr2},
+  	zipcode = #{zipcode},
+  	filename = #{filename},
+  	realfilename = #{realfilename}
+  	
+  	WHERE userid = #{userid}
+  </update>
+  
+  
+  
   
   
   

@@ -45,18 +45,17 @@ public class profileServlet extends HttpServlet {
 		// 파일 읽기
 		// 응답 생성
 		String filename = memVO.getFilename(); // 파일경로
-		FileInputStream fis = new FileInputStream(filename);
-		
-		
-		
-		ServletOutputStream sos = response.getOutputStream();
-		
-		byte[] buffer = new byte[512];
-		while(fis.read(buffer) != -1) {
-			sos.write(buffer);
+		if(filename != null) {
+			FileInputStream fis = new FileInputStream(filename);
+			ServletOutputStream sos = response.getOutputStream();
+			
+			byte[] buffer = new byte[512];
+			while(fis.read(buffer) != -1) {
+				sos.write(buffer);
+			}
+			fis.close();
+			sos.flush();
+			sos.close();
 		}
-		fis.close();
-		sos.flush();
-		sos.close();
 	}
 }

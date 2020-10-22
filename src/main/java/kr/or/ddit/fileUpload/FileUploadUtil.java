@@ -40,4 +40,30 @@ public class FileUploadUtil {
 		
 		return parseMap.get("filename");
 	}
+	
+	
+	
+	
+	public static String getExtension(String realfilename) {
+		
+		
+		String fileExtension = "";
+		if(realfilename == null || realfilename.indexOf(".") == -1) {
+			return fileExtension;
+		}else {
+			String[] fileExTemp = realfilename.split("\\.");
+			for(int i=0; i<fileExTemp.length; i++) {
+				if(i == fileExTemp.length - 1) {
+					fileExtension = fileExTemp[i];
+				}
+			}
+			return fileExTemp[1];
+		}
+		
+	}
+	
+	
+	
+	
+	
 }

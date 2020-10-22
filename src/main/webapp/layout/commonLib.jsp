@@ -18,6 +18,11 @@
 			console.log("userid = " + userid)
 			document.location = "/memberInfo?userid=" + userid;
 		})
+
+
+		$("#memberRegistButton").on("click", function(){
+			document.location = "/memberRegist"
+		})
 	})
 	
 	
@@ -63,7 +68,7 @@
 			</table>
 		</div>
 
-		<a class="btn btn-default pull-right">사용자 등록</a>
+		<a class="btn btn-default pull-right" id="memberRegistButton">사용자 등록</a>
 
 		<div class="text-center">
 			<ul class="pagination">

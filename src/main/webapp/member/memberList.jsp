@@ -21,7 +21,7 @@
 
 <!-- <script src="/js/jquery/jquery-1.12.4.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script><!-- Custom styles for this template --> --%>
+<script src="${pageContext.request.contextPath}/css/bootstrap.js"></script><!-- Custom styles for this template -->
 
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
