@@ -15,7 +15,7 @@
 
 <title>Jsp</title>
 
-<script src="${cp}/js/jquery/jquery-1.12.4.js"></script>
+<!-- <script src="/js/jquery/jquery-1.12.4.js"></script> -->
 <link href="${cp}/css/bootstrap.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <script src="${cp}/css/bootstrap.js"></script>
@@ -55,15 +55,15 @@
 					<div class="form-group">
 						<label for="req_dt" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<label class="control-label"><img src="${cp }/profile/${memVO.filename }" alt="사진"/></label>
-<%-- 							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label> --%>
+<%-- 							<label class="control-label"><img src="${cp }/profile/${memVO.filename }" alt="사진"/></label> --%>
+							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label>
 						</div>
 					</div>
 					
 					
 
 					<div class="form-group">
-						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
+						<label for="userid" class="col-sm-2 control-label">사용자 아이디</label>
 						<div class="col-sm-10">
 							<label class="control-label">${memVO.userid }</label>
 						</div>
