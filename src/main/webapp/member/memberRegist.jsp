@@ -100,7 +100,7 @@
 					<div class="form-group">
 						<label for="realfilename" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-								<input type="file" name="realfilename" />
+							<input type="file" name="realfilename" />
 						</div>
 					</div>
 					
