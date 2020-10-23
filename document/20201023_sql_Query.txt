@@ -1,0 +1,367 @@
+select sido, sigungu, gb
+from fastfood;
+
+-- 도시발전지수 : 시도 시군구별 (kfc + 맥도날드 + 버거킹) / 롯데리아
+-- 도시발전지수가 높은 시도 시군구별로 데이터를 조회
+순위      시도      시순구         버거지수(소수점 둘째자리 까지만)
+1        서울
+2        서울
+.
+.
+
+
+---------------------------------------------------------------------------------------------------------------------
+select burger.sido, burger.sigungu, burger.MAC as MAC, burger.KFC as KFC, burger.BURGERKING as BURGERKING, burger.LOTTE as LOTTE, (burger.MAC + burger.KFC + burger.BURGERKING), trunc((burger.MAC + burger.KFC + burger.BURGERKING) / burger.LOTTE, 2) as 도시발전지수
+from (select lotte.sido, lotte.sigungu as sigungu, nvl(mac.macCnt, 0) as MAC, nvl(kf.kfcCnt, 0) as KFC, nvl(bk.bkCnt, 0) as BURGERKING, nvl(lotte.lotteCnt, 0) as LOTTE
+        from (SELECT SIDO, SIGUNGU, count(gb) as macCnt, gb
+              FROM FASTFOOD
+              WHERE GB = '맥도날드'
+              GROUP BY SIDO, SIGUNGU, gb) mac
+        left outer join (SELECT SIDO, SIGUNGU, count(gb) as bkCnt, gb
+                         FROM FASTFOOD
+                         WHERE GB = '버거킹'
+                         GROUP BY SIDO, SIGUNGU, gb) bk
+        on mac.SIDO = bk.SIDO
+        and mac.SIGUNGU = bk.SIGUNGU
+        left outer join (SELECT SIDO, SIGUNGU, count(gb) as kfcCnt, gb
+                         FROM FASTFOOD
+                         WHERE GB = 'KFC'
+                         GROUP BY SIDO, SIGUNGU, gb) kf
+        on mac.SIDO = kf.SIDO
+        and mac.SIGUNGU = kf.SIGUNGU
+        right outer join (SELECT SIDO, SIGUNGU, count(gb) as lotteCnt, gb
+                          FROM FASTFOOD
+                          WHERE GB = '롯데리아'
+                          GROUP BY SIDO, SIGUNGU, gb) lotte
+        on mac.SIDO = lotte.SIDO
+        and mac.SIGUNGU = lotte.SIGUNGU) burger
+order by 8 desc
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+select SIDO, SIGUNGU, 
+        sum(DECODE(GB, '맥도날드', 1, 0)) m,
+        sum(DECODE(GB, '버거킹', 1, 0)) b,
+        sum(DECODE(GB, 'KFC', 1, 0)) k,
+        sum(DECODE(GB, '롯데리아', 1, 0)) l
+        
+        ,(sum(DECODE(GB, '맥도날드', 1, 0)) +
+        sum(DECODE(GB, '버거킹', 1, 0)) +
+        sum(DECODE(GB, 'KFC', 1, 0))) / 
+        DECODE(sum(DECODE(GB, '롯데리아', 1, 0)), 0, 1, sum(DECODE(GB, '롯데리아', 1, 0)), 2) idx
+from fastfood
+where gb in ('KFC', '맥도날드', '버거킹', '롯데리아')
+group by SIDO, SIGUNGU
+order by idx desc
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+select --decode(d, 1, iw+1, iw), --dt, d,
+        MIN(DECODE(d, 1, dt)) sun, MIN(DECODE(d, 2, dt)) mon, MIN(DECODE(d, 3, dt)) tus,
+        MIN(DECODE(d, 4, dt)) wend, MIN(DECODE(d, 5, dt)) thir, MIN(DECODE(d, 6, dt)) fri,
+        MIN(DECODE(d, 7, dt)) sat
+from 
+(select (to_date( :yyyymm, 'YYYYMM') + LEVEL - 1) dt, 
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'd') d,
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'IW') iw
+from dual
+connect by level <= TO_CHAR(LAST_DAY(TO_DATE( :yyyymm, 'YYYYMM')), 'DD'))
+group by decode(d, 1, iw+1, iw)
+ORDER BY decode(d, 1, iw+1, iw)
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+select NVL(min(DECODE(dt, '01', sal)), 0) M1, NVL(min(DECODE(dt, '02', sal)), 0) M2, NVL(min(DECODE(dt, '03', sal)), 0) M3, 
+       NVL(min(DECODE(dt, '04', sal)), 0) M4, NVL(min(DECODE(dt, '05', sal)), 0) M5, NVL(min(DECODE(dt, '06', sal)), 0) M6
+from dual, (select dt, sum(sales) as sal
+            from(select SUBSTR(to_char(dt, 'YYYYMM'), 5 ,6) dt, sales
+                 from sales)
+            group by dt
+            order by dt)
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+select nvl(min(m1), 0), nvl(min(m2), 0), nvl(min(m3), 0), 
+       nvl(min(m4), 0), nvl(min(m5), 0), nvl(min(m6), 0)
+from(select DECODE(dt, '01', sal) m1, DECODE(dt, '02', sal) m2, DECODE(dt, '03', sal) m3,
+            DECODE(dt, '04', sal) m4, DECODE(dt, '05', sal) m5, DECODE(dt, '06', sal) m6
+     from (select SUBSTR(to_char(dt, 'YYYYMM'), 5 ,6) dt, sum(sales) sal
+            from sales
+            group by SUBSTR(to_char(dt, 'YYYYMM'), 5 ,6)
+            order by dt))
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+-- 하향식 쿼리
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level
+FROM dept_h
+START WITH deptcd = 'dept0'
+connect by p_deptcd = prior deptcd
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+계층쿼리
+오라클 함수
+1. single row function ==> length, trim, upper
+2. multi row function ==> sum, avg, count, max, min
+
+
+select length('TEST')
+from users;
+
+select length('TEST')
+from dual;
+
+
+'202010' == 31일
+'202009' == 30일
+'202002' == 29일
+
+
+select TO_CHAR(LAST_DAY(TO_DATE('202002', 'YYYYMM')), 'DD')
+from dual
+connect by level <= 30;
+
+
+
+select level
+from dual
+connect by level <= TO_CHAR(LAST_DAY(TO_DATE('202002', 'YYYYMM')), 'DD');
+
+
+
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MI IW')
+FROM DUAL;
+
+
+
+SELECT TO_CHAR(SYSDATE, 'd')
+FROM DUAL;
+        
+
+
+select decode(d, 1, iw+1, iw), --dt, d,
+        MIN(DECODE(d, 1, dt)) sun, MIN(DECODE(d, 2, dt)) mon, MIN(DECODE(d, 3, dt)) tus,
+        MIN(DECODE(d, 4, dt)) wend, MIN(DECODE(d, 5, dt)) thir, MIN(DECODE(d, 6, dt)) fri,
+        MIN(DECODE(d, 7, dt)) sat
+from 
+(select (to_date( :yyyymm, 'YYYYMM') + LEVEL - 1) dt, 
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'd') d,
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'IW') iw
+from dual
+connect by level <= TO_CHAR(LAST_DAY(TO_DATE( :yyyymm, 'YYYYMM')), 'DD'))
+group by decode(d, 1, iw+1, iw)
+ORDER BY decode(d, 1, iw+1, iw)
+
+
+
+
+
+
+select DECODE(d, 1, iw+1, iw), --dt, d,
+        DECODE(d, 1, dt) sun, DECODE(d, 2, dt) mon, DECODE(d, 3, dt) tus,
+        DECODE(d, 4, dt) wend, DECODE(d, 5, dt) thir, DECODE(d, 6, dt) fri,
+        DECODE(d, 7, dt) sat
+from 
+(select (to_date( :yyyymm, 'YYYYMM') + LEVEL - 1) dt, 
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'd') d,
+        TO_CHAR((to_date( :yyyymm, 'YYYYMM') + LEVEL - 1), 'IW') iw
+from dual
+connect by level <= TO_CHAR(LAST_DAY(TO_DATE( :yyyymm, 'YYYYMM')), 'DD'))
+
+
+
+
+
+select dt, sum(sales)
+from(select substr(to_char(dt, 'yyyymm'), 5, 6) dt, sales
+     from sales)
+group by dt
+order by dt
+
+
+
+
+
+
+계층쿼리 : 행과 관련된 다른행을 찾아가는 쿼리
+START WITH 시작점 고르기 : 시작점이 하나일 필요 없음
+                여러개가 선택된 조견이면 여러개를 하나씩 순차적으로 처리
+CONNECT BY 연결조건 : 행과 다른행을 어떤 조건으로 찾아갈지
+prior : 현재 읽고있는 행
+
+
+
+
+-- tree 구조를 갖는다.
+-- 하향식 쿼리
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level
+FROM dept_h
+START WITH deptcd = 'dept0'
+--connect by prior deptcd = p_deptcd
+connect by p_deptcd = prior deptcd --AND xx = prior yy;
+
+
+
+-- 상향식 쿼리 짜기
+-- 시작점 : 개발 2팀
+-- 연결 : 자신의 상위부서
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level
+FROM dept_h
+START WITH deptcd = 'dept0_02_1'
+connect by deptcd = prior p_deptcd;
+
+
+s_id : 노드 아이디
+ps_id : 부모 노드 아이디
+value : 노드값
+
+
+select LPAD(' ', (level-1)*4) || s_id, value
+from h_sum
+start with s_id = '0'
+connect by ps_id = prior s_id
+
+
+
+
+-- 하향식 쿼리
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level
+FROM dept_h
+START WITH deptcd = 'dept0'
+--connect by prior deptcd = p_deptcd
+connect by p_deptcd = prior deptcd --AND xx = prior yy;
+
+
+계층쿼리(특수함수)
+connect_by_root(col) 최상위 노드의 col정보를 반환하는 함수
+
+
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level,
+        connect_by_root(deptnm) cbr
+FROM dept_h
+START WITH deptcd = 'dept0'
+--connect by prior deptcd = p_deptcd
+connect by p_deptcd = prior deptcd --AND xx = prior yy;
+
+
+
+
+계층쿼리(특수함수)
+계층쿼리에서 사용할수 있는 함수 3가지
+1. connect_by_root(col) : 최상위 노드의 col정보를 반환하는 함수
+2. sys_connect_by_path(col, 구분자) : 계층 순회과정에서 만난
+                                      행들의 col 정보를 구분자로 이어서 표현
+3. connect_by_isleaf : 해당 노드가 자식이 없는 노드인지 확인(리턴)
+                        1 : 자식이 없는 leaf node
+                        0 : 자식이 있는 중간 node
+
+
+
+
+
+
+
+
+-- connect_by_root(col)
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level,
+        connect_by_root(deptnm) cbr
+FROM dept_h
+START WITH deptcd = 'dept0'
+connect by p_deptcd = prior deptcd;
+
+
+
+
+-- sys_connect_by_path(col, 구분자)
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level,
+        connect_by_root(deptnm) cbr,
+        LTRIM(SYS_CONNECT_BY_PATH(deptnm, '-'), '-') scbp
+FROM dept_h
+START WITH deptcd = 'dept0'
+connect by p_deptcd = prior deptcd;
+
+
+
+
+-- connect_by_isleaf
+SELECT deptcd, LPAD(' ', (LEVEL-1)*4) || deptnm, level,
+        connect_by_root(deptnm) cbr,
+        LTRIM(SYS_CONNECT_BY_PATH(deptnm, '-'), '-') scbp,
+        connect_by_isleaf cbl
+FROM dept_h
+START WITH deptcd = 'dept0'
+connect by p_deptcd = prior deptcd;
+
+
+
+
+
+
+
+
+
+
+-- 게시판 계층쿼리
+select * 
+from board_test
+
+
+
+
+
+select seq, LPAD(' ', (LEVEL-1)*4) || title title, gn
+from board_test
+start with parent_seq is null
+connect by parent_seq = prior seq
+order siblings by gn desc, seq asc
+
+-- order siblings by ==> 계층구조를 유지하면서 정렬한다.
+
+
+
+select *
+from 
+(
+select connect_by_root(seq) gn, LPAD(' ', (LEVEL-1)*4) || title title, seq
+from board_test
+start with parent_seq is null
+connect by parent_seq = prior seq
+)
+order by gn desc, seq asc
+
+
+
+
+
+
+

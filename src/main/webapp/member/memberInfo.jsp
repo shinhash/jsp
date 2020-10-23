@@ -29,11 +29,22 @@
 	$(document).ready(function(){
 
 		$("#updateBtn").on("click", function(){
-			var userid = $("#userid").text();
-			document.location = "/memberUpdate?userid=" + userid;
-		})
+// 			var userid = $("#userid").text();
+// 			document.location = "/memberUpdate?userid=" + userid;
+			document.location = "/memberUpdate?userid=${memVO.userid}";			
+		});
 
-	})
+
+
+		$("#downBtn").on("click", function(){
+// 			var userid = $(this).data("userid");
+// 			document.location = "/profileDownload?userid=" + userid;
+			document.location = "/profileDownload?userid=${memVO.userid}";			
+		})
+		
+		
+
+	});
 
 
 </script>
@@ -63,7 +74,8 @@
 						<label for="req_dt" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 <%-- 							<label class="control-label"><img src="${cp }/profile/${memVO.filename }" alt="사진"/></label> --%>
-							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label>
+							<label class="control-label"><img src="${cp }/profileImg?userid=${memVO.userid }" /></label><br><br>
+							<button type="button" class="btn btn-default" id="downBtn" data-userid="${memVO.userid }">다운로드</button>
 						</div>
 					</div>
 					

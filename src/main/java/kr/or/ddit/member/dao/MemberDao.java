@@ -68,10 +68,9 @@ public class MemberDao implements MemberDaoI {
 		
 		
 		int insertCnt =  0;
-		insertCnt = sqlSession.insert("member.insertMember", memVO);
-//		try {
-//			insertCnt = sqlSession.insert("member.insertMember", memVO);
-//		}catch(Exception e) { }
+		try {
+			insertCnt = sqlSession.insert("member.insertMember", memVO);
+		}catch(Exception e) { }
 		
 		if(insertCnt == 1) {
 			sqlSession.commit();			
