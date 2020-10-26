@@ -17,7 +17,6 @@
 <title>Jsp</title>
 
 
-<!-- <script src="/js/jquery/jquery-1.12.4.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script><!-- Custom styles for this template --> --%>
 
