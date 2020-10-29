@@ -25,15 +25,6 @@
 		})
 	})
 	
-	
-	
-// 	$(function(){
-// 		$("#memberInfo tr").on("click", function(){
-// 			userid = $(this).attr("data-userid")
-// 			document.location = "/memberInfo?userid=" + userid;
-// 		})
-// 	})
-	
 </script>
 
 

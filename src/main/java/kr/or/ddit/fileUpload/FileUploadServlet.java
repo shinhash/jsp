@@ -1,6 +1,5 @@
 package kr.or.ddit.fileUpload;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
