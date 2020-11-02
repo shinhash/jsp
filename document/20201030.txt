@@ -1,0 +1,44 @@
+framework ==> 전체적인 틀(like a clock in parts)
+누군가에 의해서 관리되는 흐름
+ioc : 역전 제어(inversion of control)
+
+
+framework 와 library의 차이
+제어권이 누구한테 있는가?
+
+
+framework 사용시 비기능 요소들을 제공받을 수 있다.
+비기능 : DB connection 관리, 트렌젝션 제어
+기능 : 비지니스 기능
+
+
+framework 란 : 소프트웨어의 특정 문제를 해결하기 위해서 상호 협력하는 클래스와 인터페이스의 집합
+library 란 : 단순 활용이 가능한 도구들의 집합
+
+
+
+
+
+jdbc ==> oracle driver 필요
+central repository에서 관리하지 않음
+
+3rd repository 등록
+메이븐에게 해당 프로젝트의 java version 알림
+maven-compiler-plugin
+
+
+
+
+https://mvnrepository.com/search?q=spring
+1번 ~ 7번
+
+1번 =  4.3.29.RELEASE
+
+
+
+
+
+
+
+
+
