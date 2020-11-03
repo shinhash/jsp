@@ -10,6 +10,9 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  
+  
+  
   <!-- 스프링 부모 컨테이너 생성 : service, repository(contextConfigLocation ctrl + shit + t ==> contextConfigLocation) -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
@@ -34,9 +37,9 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>dispatcherServlet</servlet-name>
+<!--   	<url-pattern>*.do</url-pattern> -->
 <!--   	<url-pattern>/*</url-pattern> -->
   	<url-pattern>/</url-pattern>
-<!--   	<url-pattern>*.do</url-pattern> -->
   </servlet-mapping>
   
   

@@ -14,7 +14,7 @@ public class IocTest {
 	private static final Logger logger = LoggerFactory.getLogger(IocTest.class);
 	
 	public static void main(String[] args) {
-		// 스프링 빈 사용설면ㅇ서를 사용하여 스프링 컨테이너를 생성
+		// 스프링 빈 사용설명서를 사용하여 스프링 컨테이너를 생성
 		// 스프링 컨테이너로 : applicationContext ==> IOC
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:kr/or/ddit/config/spring/ioc/ioc.xml");
 		

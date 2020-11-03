@@ -108,4 +108,52 @@ dispatcherServlet을 통해 생성
 
 
 
+dispatcherServlet의 url-pattern에 따른 정상 처리여부
+<url-pattern>/*</url-pattern>
+<url-pattern>*.do</url-pattern>
+url-pattern				spring controller(/login/view.jsp)		mvc:default-servlet-handler 			index.jsp			jquery-3.5.1.min.js
+	/*									X								미적용								X						X
+	/*									X								적용									O						O
+	/									O								미적용								O						X
+	/									O								적용									O						O
+	*.do								O																	O						O
+	
+	
+	
+	
+	
+	
+
+<url-pattern>/*</url-pattern>일 경우에는 모든 url에 대한 요청을 처리한다.
+하지만 
+spring 컨테이너에는 jsp를 처리할수 있는 기능이 없다. 
+또한 정적인 자료를 처리하는 기능이 없다.
+그런데도 /*로 모든 url을 처리하기때문에 404오류가 발생한다.
+
+
+
+
+
+server의 web.xml에는
+
+ <!-- The mapping for the default servlet -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- The mappings for the JSP servlet -->
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+
+다음과 같이 기본적인 servlet(jsp, default)이 설정 되어있다.
+<url-pattern>/</url-pattern>는 모든 url에 적합하지 않을 경우의 default설정이다.
+
+
+
+
+
 
