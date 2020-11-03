@@ -20,7 +20,7 @@
    
    
    <!-- logger name ==> 해당 logger가 사용될 package경로 -->
-   <logger name="CONTEXT_PATH" level="debug">
+   <logger name="org.springframework" level="debug">
        <appender-ref ref="STDOUT" />
    </logger> 
    

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.board.service.BoardServiceI;
 
 
-@WebServlet("/login")
+//@WebServlet("/login")
 public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(login.class);
