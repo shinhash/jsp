@@ -66,19 +66,11 @@ public class IocCollectionTest {
 		
 		/***Given***/
 		Set<String> set;
-		List<String> list = new ArrayList<String>();
 
 		/***When***/
 		set = collectionBean.getSet();
-//		Iterator<String> it = set.iterator();
-		
-//		while(it.hasNext()) {
-//			String name = it.next();
-//			list.add(name);
-//		}
-		
+
 		/***Then***/
-//		assertEquals("moon", list.get(2));
 		assertEquals(3, set.size());
 	}
 	

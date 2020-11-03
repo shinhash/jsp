@@ -29,13 +29,16 @@ public class IocScopeTest {
 	ApplicationContext context;
 	
 	@Resource(name="boardRepository")
+//	@Autowired
 	private BoardRepositoryI boardRepository;
 	
 	@Resource(name="boardRepository")
+//	@Autowired
 	private BoardRepositoryI boardRepository2;
 
 
 	@Resource(name="boardRepository_a")
+//	@Autowired
 	private BoardRepositoryI boardRepository_a;
 	
 	
