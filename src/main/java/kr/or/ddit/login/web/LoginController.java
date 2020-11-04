@@ -130,6 +130,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		logger.debug("mav attribute rangers : {}", rangers);
+		logger.debug("mav attribute memVO : {}", memVO);
 		
 		// viewName을 설정
 		mav.setViewName("main");
