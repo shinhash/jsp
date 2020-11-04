@@ -14,9 +14,6 @@ public class MemberService implements MemberServiceI{
 	
 	@Resource(name = "memberRepository")
 	private MemberDaoI memDao;
-//	public MemberService() {
-//		memDao = new MemberDao();
-//	}
 
 	@Override
 	public MemberVO getMember(String userid) {
