@@ -42,8 +42,6 @@ public class FileUploadControllerTest extends WebTestConfig{
 	@Test
 	public void fileuploadPostTest() throws Exception {
 		
-//		mockMvc.perform(fileUpload("/fileupload/view")).andDo(print());
-		
 		InputStream is = getClass().getResourceAsStream("/kr/or/ddit/upload/sally.png");
 //		InputStream is = Thread.currentThread()
 //								.getContextClassLoader()
@@ -57,10 +55,5 @@ public class FileUploadControllerTest extends WebTestConfig{
 								.param("userid", "brown"))
 						.andExpect(view().name("fileupload/fileupload"))
 						.andExpect(status().isOk());
-		
 	}
-	
-	
-	
-
 }

@@ -14,6 +14,7 @@
   
   
   <!-- 스프링 부모 컨테이너 생성 : service, repository(contextConfigLocation ctrl + shit + t ==> contextConfigLocation) -->
+  <!-- contextConfigLocation는 정해진 약속(이름)이기 때문에 변경시 적용이 불가능하다. ==> error -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:kr/or/ddit/config/spring/root-context.xml</param-value>
@@ -26,6 +27,8 @@
   
   
   <!-- 자식 컨테이너 생성 - dispatcherServlet을 통해 생성 : controller(contextConfigLocation ctrl + shit + t ==> dispatcherServlet) -->
+  <!-- org.springframework.web.servlet.DispatcherServlet // DispatcherServlet에서 org.springframework.web.context.ContextLoaderListener의 contextConfigLocation를 읽어올 가능성이 있다고 판단(어디까지나 추측) -->
+  <!-- 눈에 보이지 않는 영역에서 spring framework가 스스로 셋팅한다. 그래서 어디까지나(개발자는) 추측을 해야한다. -->
   <servlet>
   	<servlet-name>dispatcherServlet</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
