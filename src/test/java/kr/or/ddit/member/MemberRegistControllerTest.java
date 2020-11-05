@@ -47,7 +47,7 @@ public class MemberRegistControllerTest extends WebTestConfig{
 												)
 											.andDo(print())
 											.andExpect(redirectedUrl("/memberList/view"))
-											.andExpect(status().is(302));
+											.andExpect(status().is3xxRedirection());
 	}
 
 }

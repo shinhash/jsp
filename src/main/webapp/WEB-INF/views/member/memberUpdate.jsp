@@ -167,7 +167,7 @@
 						<label for="zipcode" class="col-sm-2 control-label">우편번호</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="zipcode" name="zipcode"
-								value="${memVO.zipcode }">
+								value="${memVO.zipcode }" readonly="readonly">
 						</div>
 					</div>
 					

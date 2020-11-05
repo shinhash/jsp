@@ -60,7 +60,7 @@ public class MemberUpdateControllerTest extends WebTestConfig{
 										)
 									.andDo(print())
 									.andExpect(redirectedUrl("/memberInfo/view?userid="+userid))
-									.andExpect(status().is(302));
+									.andExpect(status().is3xxRedirection());
 	}
 
 }

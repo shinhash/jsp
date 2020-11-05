@@ -35,7 +35,6 @@
 // 					console.log(data)
 					$("#addr1").val(data.roadAddress);
 					$("#zipcode").val(data.zonecode);
-					 
 			        
 			    }
 			}).open();
