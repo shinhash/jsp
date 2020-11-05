@@ -15,6 +15,7 @@
   
   <!-- 스프링 부모 컨테이너 생성 : service, repository(contextConfigLocation ctrl + shit + t ==> contextConfigLocation) -->
   <!-- contextConfigLocation는 정해진 약속(이름)이기 때문에 변경시 적용이 불가능하다. ==> error -->
+  <!-- 부모 생성은 1개가 최대이다. ==> 부모의 이름이 중복되어서는 안된다. 또한 해당 부모의 이름은 contextConfigLocation이며 고정되는 이름이다. -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:kr/or/ddit/config/spring/root-context.xml</param-value>

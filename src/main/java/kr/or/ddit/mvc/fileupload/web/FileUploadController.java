@@ -1,4 +1,4 @@
-package kr.or.ddit.fileupload.web;
+package kr.or.ddit.mvc.fileupload.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +49,8 @@ public class FileUploadController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
+		
+		// transferTo() 파일 데이터를 지정한 file로 저장
 		return "fileupload/fileupload";
 	}
 	

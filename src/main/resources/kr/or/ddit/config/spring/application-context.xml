@@ -15,6 +15,8 @@
 	
 	
 	<!-- ViewResolver역할을 수행하는 bean 객체 -->
+	<!-- controller로 부터 return받은 String 문자열의 앞부분(prefix)과 뒷부분(suffix)에 
+			 문자열을 추가하여 해당 경로의 파일(view ==> 여기서는 jsp)을 실행하는 bean 객체 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- prefix : 접두어, sufffix : 접미어
 			 Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로
