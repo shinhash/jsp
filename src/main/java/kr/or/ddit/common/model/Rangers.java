@@ -5,8 +5,6 @@ import java.util.List;
 public class Rangers {
 
 	private List<String> userid;
-
-	
 	
 	public List<String> getUserid() {
 		return userid;

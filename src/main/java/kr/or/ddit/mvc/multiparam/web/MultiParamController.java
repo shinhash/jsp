@@ -42,8 +42,6 @@ public class MultiParamController {
 		for(String user : userArr) {
 			logger.debug("user : {}", user);
 		}
-		
-		
 		return"multi/view";
 	}
 	

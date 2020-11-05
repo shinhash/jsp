@@ -14,7 +14,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
 		<li class="active"><a href="#">Main <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="memberList">사용자</a></li>
-		<li class="active"><a href="JobServlet">jobs</a></li>
+		<li class="active"><a href="/memberList/view">사용자</a></li>
+		<li class="active"><a href="#">jobs</a></li>
 	</ul>
 </div>

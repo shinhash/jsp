@@ -28,9 +28,10 @@ public class RedirectController {
 		// 리다이렉트된 페이지에서 일회에 한해 사용할 수 있는 속성(일회용)
 		ra.addFlashAttribute("msg_f", "hello redirect");
 		
+		// 리다이렉트된 페이지에서 사용할 수 있는 파라미터(not!! 일회용)
 		ra.addAttribute("msg_f", "hello redirect");
 		
-		// 리다이렉트시 모델 객체에 추가된 속성을 리다이렉트 주ㅗ소의 파라미터로 추가한다.(get)
+		// 리다이렉트시 모델 객체에 추가된 속성을 리다이렉트 주소의 파라미터로 추가한다.(get)
 		// "redirect:login/view" ==> /login/view?msg=hello+model
 		// RedirectAttributes를 추가시에는 url의 변경(파라미터)이 되지않는다.
 		

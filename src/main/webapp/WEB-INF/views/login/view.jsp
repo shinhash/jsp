@@ -128,10 +128,10 @@
   </head>
 
   <body>
-  	msg : ${msg }<br>
-  	msg_s : ${msg_s }<br>
-  	msg_f : ${msg_f }<br>
-  	<c:remove var="msg_s" scope="session"/>
+<%--   	msg : ${msg }<br> --%>
+<%--   	msg_s : ${msg_s }<br> --%>
+<%--   	msg_f : ${msg_f }<br> --%>
+<%--   	<c:remove var="msg_s" scope="session"/> --%>
 
     <div class="container">
 

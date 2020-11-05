@@ -16,12 +16,12 @@
 		$("#memberInfo tr").on("click", function(){
 			var userid = $(this).data("userid")
 			console.log("userid = " + userid)
-			document.location = "/memberInfo?userid=" + userid;
+			document.location = "/memberInfo/view?userid=" + userid;
 		})
 
 
 		$("#memberRegistButton").on("click", function(){
-			document.location = "/memberRegist"
+			document.location = "/memberRegist/view"
 		})
 	})
 	
@@ -70,7 +70,7 @@
 							<li class="active"><span>${i}</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${pageContext.request.contextPath}/memberList?pageNum=${i}">${i}</a></li>						
+							<li><a href="${pageContext.request.contextPath}/memberList/view?pageNum=${i}">${i}</a></li>						
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

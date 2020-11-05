@@ -18,20 +18,24 @@ spring framework에서 복수 파라미터 받기
 	
 	1. List로 받기 : @RequestParam("userid") List<String> userList
 	
-	2. 배열로 받기 : @RequestParam("userid") String[] userArrx
-				  String[] userid
+	2. 배열로 받기 : @RequestParam("userid") String] userArr --> 출력시에는 object타입으로 캐스팅
+				  String[] userid --> 출력시에는 object타입으로 캐스팅
 	
 	3. command 객체로 받기 : 필드를 List로 선언하고 필드이름을 파라미터 이름과 동일하게 한다.
+		객체안에 List로 선언한 필드의 이름이 파라미터 이름과 동일한 경우 해당 복수 파라미터를 전부 받아올 수 있다.
+
+
+
+
 	
 redirect
-jsp/servlet " response.sendRedirect("리다이렉트 주소")
+jsp/servlet : response.sendRedirect("리다이렉트 주소")
 spring : viewName 앞에 접두어를 붙여서 반환
 			"redirect:리다이렉트 할 주소"
 			"forward:포워딩 할 주소"
 
 
 일회성 파라미터
-
 	1. HttpSession session 으로 설정 후
 		jsp에서 <c:remove var="msg_s" scope="session"/>
 		==> 일회성 같이 보이게 하는 역할
@@ -39,9 +43,16 @@ spring : viewName 앞에 접두어를 붙여서 반환
 	2. RedirectAttributes 으로 설정 후
 		해당 객체이름.addFlashAttribute("", "")
 		==> 일회성 객체
+		
+		// 리다이렉트된 페이지에서 일회에 한해 사용할 수 있는 속성(일회용)
+		ra.addFlashAttribute("msg_f", "hello redirect");
+		
+		// 리다이렉트된 페이지에서 사용할 수 있는 파라미터(not!! 일회용)
+		ra.addAttribute("msg_f", "hello redirect");
+		
 
 
-
+jsp 프로젝트의 member와 관련된 화면, 기능들을 spring 프로젝트로 이관
 
 
 
