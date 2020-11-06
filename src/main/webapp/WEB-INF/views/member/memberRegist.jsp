@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +16,14 @@
 <link rel="icon" href="../../favicon.ico">
 
 <title>Jsp</title>
+
+
+<style type="text/css">
+	
+</style>
+
+
+
 
 <script src="${cp }/js/jquery-3.5.1.min.js"></script>
 <link href="${cp}/css/bootstrap.css" rel="stylesheet">
@@ -50,22 +62,18 @@
 
 		});
 
-		
 // 		initData();
-		
 	});
-
-
 
 	
 	function initData(){
-// 		$("#userid").val("shs");
-// 		$("#usernm").val("신하승");
-// 		$("#alias").val("java");
-// 		$("#pass").val("pass1234");
-// 		$("#addr1").val("대전 중구 중앙로 76");
-// 		$("#addr2").val("영민빌딩 4충 404호");
-// 		$("#zipcode").val("34904");
+		$("#userid").val("shs");
+		$("#usernm").val("신하승");
+		$("#alias").val("java");
+		$("#pass").val("pass1234");
+		$("#addr1").val("대전 중구 중앙로 76");
+		$("#addr2").val("영민빌딩 4충 404호");
+		$("#zipcode").val("34904");
 	}
 
 </script>
@@ -119,6 +127,7 @@
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="usernm" name="usernm"
 								placeholder="사용자 이름" value="${param.usernm }">
+								<span style="color:red;"><form:errors path="memberVO.usernm" /></span>
 						</div>
 					</div>
 					

@@ -5,9 +5,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.member.model.MemberVO;
+import kr.or.ddit.member.model.MemberVOValidator;
 import kr.or.ddit.member.service.MemberServiceI;
 
 @RequestMapping("/memberInfo")
