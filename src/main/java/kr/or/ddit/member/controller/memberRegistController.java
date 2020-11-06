@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.or.ddit.member.model.JSR303MemberVO;
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.model.MemberVOValidator;
 import kr.or.ddit.member.service.MemberServiceI;
@@ -40,7 +39,7 @@ public class memberRegistController{
 	
 	@RequestMapping(path="/regist", method = RequestMethod.POST)
 	public String memRegistInsert(@Valid MemberVO memVO, BindingResult br, @RequestPart("file") MultipartFile file) {
-//	public String memRegistInsert(@Valid JSR303MemberVO memVO, BindingResult br, @RequestPart("file") MultipartFile file) {
+//	public String memRegistInsert(MemberVO memVO, BindingResult br, @RequestPart("file") MultipartFile file) {
 		
 		
 //		new MemberVOValidator().validate(memVO, br);

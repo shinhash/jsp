@@ -15,21 +15,46 @@
 	</context:component-scan>
 	
 	
+	
+	<bean id="profileImgDownload" class="kr.or.ddit.mvc.download.ProfileImgDownload"></bean>
+	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"></bean>
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"></property>
+	</bean>
+	
+	
+	
+	
+	
+	
 	<!-- ViewResolver역할을 수행하는 bean 객체 -->
 	<!-- controller로 부터 return받은 String 문자열의 앞부분(prefix)과 뒷부분(suffix)에 
 			 문자열을 추가하여 해당 경로의 파일(view ==> 여기서는 jsp)을 실행하는 bean 객체 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- prefix : 접두어, sufffix : 접미어
-			 Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로
-			 응답을 생성
+			 Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로 응답을 생성
 			 LoginController.getView() ==> "login/view"
 			 
 			 		prefix	   + 	viewName  + suffix
 			 "/WEB-INF/views/" + "login/view" + ".jsp"
 			  -->
+			  
+		<property name="order" value="1"></property>
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!-- 파일 업로드 처리를 위한 multipartResolver 설정 -->
@@ -37,6 +62,19 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	
 	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!-- @Contoller, @RequestMapping,
@@ -47,9 +85,26 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- spring container가 처리하지 못하는 요청에 대해 
 		 server에 등록된 default servlet에게 위임 -->
 	<mvc:default-servlet-handler/>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -59,6 +114,12 @@
 	<!-- mapping ==> localhost/resources/style.css -->
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/views/error/"></mvc:resources>
 	
-	
+
 		
 </beans>
+
+
+
+
+
+

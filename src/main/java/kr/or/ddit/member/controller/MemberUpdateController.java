@@ -50,7 +50,7 @@ public class MemberUpdateController{
 		
 		int updateCnt = 0;
 		
-		if(file.getSize() > 0) {
+		if(file.getSize() > 0 && !file.getOriginalFilename().equals("")) {
 			String realfilename = file.getOriginalFilename();
 			String uuid = UUID.randomUUID().toString();
 			String extensName = FileUploadUtil.getExtension(realfilename);

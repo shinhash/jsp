@@ -26,7 +26,7 @@ import kr.or.ddit.member.service.MemberServiceI;
 
 
 // @WebServlet 혹은 web.xml url-mappring을 통해 url 등록
-@SessionAttributes("rangers")
+@SessionAttributes("rangers, test")
 @RequestMapping("/login")
 @Controller
 public class LoginController {
@@ -36,7 +36,18 @@ public class LoginController {
 	private MemberServiceI memService;
 	
 	
-	
+	@ModelAttribute("test")
+	public List<String> test(){
+		
+		logger.debug("test()");
+		List<String> test = new ArrayList<String>();
+		test.add("1");
+		test.add("2");
+		test.add("3");
+		test.add("4");
+		
+		return test;
+	}
 	
 	
 	
@@ -53,6 +64,27 @@ public class LoginController {
 		return rangers;
 	}
 	
+	
+	// http://localhost/login/json
+	// ranger() ==> Model 객체에 rangers라는 이름의 속성이 저장됨 ==> json()
+	// Model 객체 속성이 존재(rangers)
+	@RequestMapping("/json")
+	public String json() {
+		
+		return "jsonView"; // <bean id="jsonView" class="MappingJackson2JsonView">
+		// json 으로 처리하게끔 model객체를 전송
+		
+			// view resolver를 두개 등록함
+			// 1. beanNameViewResolver
+			// 		viewName 해당하는 빈이 있는지 찾음
+			// 		만약 해당하는 빈이 있으면 해당 view결과를 생성
+			// 		beanNameViewResolver에서 찾지 못했을 경우
+			// 2. internalResourceViewResolver
+			//		prefix, surfix 설정에 따라 /WEB-INF/views/jsonView.jsp
+			// 		internalResourceViewResolver는 view이름에 해당하는
+			//		자원이 존재하는지, 존재하지 않는지 체크하지 않고 무조건 forwarding
+			//		**viewResolver 우선순위를 가장 후 순위로 미뤄야함
+	}
 	
 	
 	
