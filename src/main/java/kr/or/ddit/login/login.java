@@ -37,6 +37,9 @@ public class login extends HttpServlet {
 		logger.debug("loginServlet doGet()");
 		logger.debug("UNT_CD parameter : {}", request.getParameter("UNT_CD"));
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		
+//		request.getRequestDispatcher("/").forward(request, response);
+//		request.getServletContext().getRequestDispatcher("default").forward(request, response);
 	}
 
 
