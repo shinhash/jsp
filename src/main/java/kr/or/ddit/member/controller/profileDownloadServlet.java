@@ -40,7 +40,7 @@ public class profileDownloadServlet extends HttpServlet {
 		MemberVO memVO = memService.getMember(userid);
 		
 		// response content-type 설정
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + memVO.getRealfilename() + "\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + memVO.getRealfilename() + "\"");	// 한글 파일 인식 불가
 		response.setContentType("application/octet-stream");
 
 		
