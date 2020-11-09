@@ -32,7 +32,8 @@ public class memberRegistController{
 
 	@RequestMapping(path="/view", method = RequestMethod.GET)
 	public String memRegistView() {
-		return "member/memberRegist";
+//		return "member/memberRegist";
+		return "tiles/member/memberRegistContent";
 	}
 	
 	
@@ -46,7 +47,7 @@ public class memberRegistController{
 		
 		
 		if(br.hasErrors()) {
-			return "member/memberRegist";
+			return "tiles/member/memberRegistContent";
 		}
 		
 		if(file.getSize() > 0 && !file.getOriginalFilename().equals("")) {
@@ -75,7 +76,7 @@ public class memberRegistController{
 		if(insertMemberCnt == 1) {
 			return "redirect:/memberList/view";
 		}else {
-			return "member/memberRegist";
+			return "tiles/member/memberRegistContent";
 		}
 	}
 

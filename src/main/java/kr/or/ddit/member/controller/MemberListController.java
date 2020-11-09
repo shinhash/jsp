@@ -41,7 +41,8 @@ public class MemberListController{
 		model.addAttribute("memList", memListPage);
 		model.addAttribute("pageCnt", pageCnt);
 		
-		return "member/memberList";
+//		return "member/memberList";
+		return "tiles/member/memberListContent";
 	}
 
 }

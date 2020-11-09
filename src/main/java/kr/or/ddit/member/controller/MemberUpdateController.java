@@ -38,7 +38,9 @@ public class MemberUpdateController{
 		memVO = memService.getMember(userid);
 		memId = userid;
 		model.addAttribute("memVO", memVO);
-		return "member/memberUpdate";
+		
+//		return "member/memberUpdate";
+		return "tiles/member/memberUpdateContent";
 	}
 	
 	
