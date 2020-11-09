@@ -25,6 +25,8 @@ public class MemberInfoController{
 		
 		MemberVO memVO = memService.getMember(userid);
 		model.addAttribute("memVO", memVO);
-		return "member/memberInfo";
+		
+//		return "member/memberInfo";
+		return "tiles/member/memberInfoContent";
 	}
 }
