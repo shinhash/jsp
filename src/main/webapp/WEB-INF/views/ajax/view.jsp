@@ -23,6 +23,10 @@
 				$("#sendJsonString").html(JSON.stringify(a));
 			});
 
+
+
+			
+
 			$("#callAjax").on("click", function(){
 				console.log("callAjax click");
 
@@ -32,7 +36,7 @@
 				$.ajax({
 					url			: "/ajax/json",
 					data		: JSON.stringify({userid : $("#userid").val(), usernm : $("#usernm").val()}),
-					contentType : "application/json; charset=UTF-8",
+					contentType : "application/json; charset=UTF-8",	// 서버로 보내는 타입
 					method		: "post",
 					dataType	: $("#dataType").val(),		// 서버로 부터 받기를 희망하는 데이터 타입
 					success		: function(res){
@@ -44,11 +48,8 @@
 						}else{
 							$("#respJsonString").html((new XMLSerializer()).serializeToString(res));
 						}
-						
 					}
-
 				});
-
 				
 			});
 

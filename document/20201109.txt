@@ -636,5 +636,28 @@ view Resolver
 		==> 해당 리소스가 존재하지 않아도 무조건 응답을 보낸다 ==> 404로 응답이 생성될 수 있음
 			** 해당 사유로 인해 internalResourceViewResolver는 viewResolver설정에서 
 				가장 후순위로 설정하는 것이 일반적이다.
-		
+
+
+
+
+Ajax 전송
+마샬링 실습
+json ==> java
+
+
+언 마샬링 실습
+java ==> json
+
+
+
+
+
+
+
+
+
+
+
+
+
 		

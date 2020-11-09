@@ -52,8 +52,8 @@ public class memberRegistController{
 		
 		if(file.getSize() > 0 && !file.getOriginalFilename().equals("")) {
 			
-			String uuid = UUID.randomUUID().toString();
 			String userRealFileName = file.getOriginalFilename();
+			String uuid = UUID.randomUUID().toString();
 			String userFileName = "D:\\profile\\" + uuid + "." + FileUploadUtil.getExtension(userRealFileName);
 
 			memVO.setRealfilename(userRealFileName);

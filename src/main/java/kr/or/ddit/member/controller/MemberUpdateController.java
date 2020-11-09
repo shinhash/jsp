@@ -53,6 +53,7 @@ public class MemberUpdateController{
 		int updateCnt = 0;
 		
 		if(file.getSize() > 0 && !file.getOriginalFilename().equals("")) {
+			
 			String realfilename = file.getOriginalFilename();
 			String uuid = UUID.randomUUID().toString();
 			String extensName = FileUploadUtil.getExtension(realfilename);
@@ -64,6 +65,7 @@ public class MemberUpdateController{
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
+			
 			
 			upMember.setFilename(filename);
 			upMember.setRealfilename(realfilename);

@@ -1,11 +1,8 @@
 package kr.or.ddit.member.controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

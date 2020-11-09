@@ -22,7 +22,7 @@ public class AjaxController {
 	}
 	
 	
-	// consumes, produce
+	// consumes, produce(수신, 응답 제한)
 	// consumes : 사용자가 보내는 contentType을 제한
 	// produces : 사용자가 응답 받기 희망(Accept header, jqery - dataType)하는
 	//				mimeType을 제한
@@ -33,10 +33,11 @@ public class AjaxController {
 	// 		==> Unsupported Media Type(415) --> 보내는 타입과 받는 타입이 일치하지 않다는 에러
 	
 	// 반환타입이 void일 경우 @RequestMapping의 path경로를 실행한다. ==> 간혹 404에러가 발생한다.
-	@ResponseBody
+	
+	@ResponseBody // controller에서 리턴하는 객체 결과를  converter를 통해 http body에 직접 전송
 	@RequestMapping(path="/ajax/json", 
-					consumes = {"application/json"}, 
-					produces = {"application/json", "application/xml"})
+					consumes = {"application/json"}, 	// 수신 타입
+					produces = {"application/json", "application/xml"}) 	// 응답 타입
 	public MemberVO json(@RequestBody MemberVO member) { // --> 마샬링
 		
 		// 마샬링 ==> a객체언어를 b객체언어로 치환하는 행위
