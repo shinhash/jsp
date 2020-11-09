@@ -16,6 +16,7 @@
 	
 	
 	
+	<bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"></bean>
 	<bean id="profileImgDownload" class="kr.or.ddit.mvc.download.ProfileImgDownload"></bean>
 	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"></bean>
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>

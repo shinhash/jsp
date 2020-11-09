@@ -1,0 +1,127 @@
+엑셀 파일 다운로드
+
+jsp/servlet 에서는 xls형식으로 밖에 다운로드를 지원하지 않는다. ==> ms-office에서 xls 형식에서는 html을 화면에 표시 가능함
+			xlsx ==> html로 표현하는것이 불가능
+
+java에서 엑셀 파일을 다룰수 있는 api : apache-poi
+
+view : Model에 저장된 header, data 속성을 읽어 poi 라이브러리를 이용하여
+		엑셀 파일로 생성, 응답
+		
+		
+pom.xml 단		
+	pom.xml 에 다음을 작성(excel 파일의 xlsx파일형식을 사용할 수 있게 하는 poi 라이브러리)
+	
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.11.3</version>
+	</dependency>	
+		
+
+
+Controller 단
+	excel의 header정보와 data정보를 작성하여 model에 add한다.
+
+
+
+application-context.xml 단
+	controller에서 반환될 String값과 같은 id를 가지는 bean 객체를 생성한뒤 class를 view객체의 경로로 지정한다. 
+	ex) <bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"></bean>
+
+
+
+
+
+View 단
+ 
+ 	// header와 data값을 model에서 가져오기
+	List<String> header = (List<String>) model.get("header");
+	List<Map<String, String>> data = (List<Map<String, String>>) model.get("data");
+		 
+	// excel 파일 contentType : application/vnd.ms-excel; UTF-8
+	response.setContentType("application/vnd.ms-excel; UTF-8");
+	
+	// 첨부파일임을 암시
+	response.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
+	
+	// poi 라이브러리를 이용하여 엑셀 파일을 생성
+	Workbook workbook = new ();
+	
+	// sheet 생성(액셀의 시트(공간)를 생성)
+	Sheet sheet = workbook.createSheet("lineFriends");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

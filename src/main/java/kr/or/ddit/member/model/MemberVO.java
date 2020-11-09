@@ -24,6 +24,13 @@ public class MemberVO {
 		
 	}
 	
+	
+	public MemberVO(String userid, String usernm) {
+		this.userid = userid;
+		this.usernm = usernm;
+	}
+
+	
 	public MemberVO(String userid, String pass, String usernm, String alias, String addr1, String addr2,
 			String zipcode, String filename, String realfilename, Date reg_dt) {
 		this.userid = userid;
@@ -40,7 +47,7 @@ public class MemberVO {
 	
 	
 	
-	
+
 	public String getUserid() {
 		return userid;
 	}
