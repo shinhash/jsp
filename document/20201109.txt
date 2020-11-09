@@ -1,127 +1,640 @@
 엑셀 파일 다운로드
 
-jsp/servlet 에서는 xls형식으로 밖에 다운로드를 지원하지 않는다. ==> ms-office에서 xls 형식에서는 html을 화면에 표시 가능함
-			xlsx ==> html로 표현하는것이 불가능
-
-java에서 엑셀 파일을 다룰수 있는 api : apache-poi
-
-view : Model에 저장된 header, data 속성을 읽어 poi 라이브러리를 이용하여
-		엑셀 파일로 생성, 응답
-		
-		
-pom.xml 단		
-	pom.xml 에 다음을 작성(excel 파일의 xlsx파일형식을 사용할 수 있게 하는 poi 라이브러리)
+	jsp/servlet 에서는 xls형식으로 밖에 다운로드를 지원하지 않는다. ==> ms-office에서 xls 형식에서는 html을 화면에 표시 가능함
+				xlsx ==> html로 표현하는것이 불가능
 	
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-	<dependency>
-	    <groupId>com.fasterxml.jackson.core</groupId>
-	    <artifactId>jackson-databind</artifactId>
-	    <version>2.11.3</version>
-	</dependency>	
-		
-
-
-Controller 단
-	excel의 header정보와 data정보를 작성하여 model에 add한다.
-
-
-
-application-context.xml 단
-	controller에서 반환될 String값과 같은 id를 가지는 bean 객체를 생성한뒤 class를 view객체의 경로로 지정한다. 
-	ex) <bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"></bean>
-
-
-
-
-
-View 단
- 
- 	// header와 data값을 model에서 가져오기
-	List<String> header = (List<String>) model.get("header");
-	List<Map<String, String>> data = (List<Map<String, String>>) model.get("data");
-		 
-	// excel 파일 contentType : application/vnd.ms-excel; UTF-8
-	response.setContentType("application/vnd.ms-excel; UTF-8");
+	java에서 엑셀 파일을 다룰수 있는 api : apache-poi
 	
-	// 첨부파일임을 암시
-	response.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
+	view : Model에 저장된 header, data 속성을 읽어 poi 라이브러리를 이용하여
+			엑셀 파일로 생성, 응답
+			
+			
+	pom.xml 단		
+		pom.xml 에 다음을 작성(excel 파일의 xlsx파일형식을 사용할 수 있게 하는 poi 라이브러리)
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.3</version>
+		</dependency>	
+			
 	
-	// poi 라이브러리를 이용하여 엑셀 파일을 생성
-	Workbook workbook = new ();
 	
-	// sheet 생성(액셀의 시트(공간)를 생성)
-	Sheet sheet = workbook.createSheet("lineFriends");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	Controller 단
+		excel의 header정보와 data정보를 작성하여 model에 add한다.
+	
+	
+	
+	application-context.xml 단
+		controller에서 반환될 String값과 같은 id를 가지는 bean 객체를 생성한뒤 class를 view객체의 경로로 지정한다. 
+		ex) <bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"></bean>
+	
+	
+	
+	
+	
+	View 단
+	 
+	 	// header와 data값을 model에서 가져오기
+		List<String> header = (List<String>) model.get("header");
+		List<Map<String, String>> data = (List<Map<String, String>>) model.get("data");
+			 
+			 
+			 
+		// excel 파일 contentType : application/vnd.ms-excel; UTF-8
+		response.setContentType("application/vnd.ms-excel; UTF-8");
+		
+		
+		
+		// 첨부파일임을 암시
+		response.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
+		
+		
+		
+		// poi 라이브러리를 이용하여 엑셀 파일을 생성
+		Workbook workbook = new ();
+		
+		
+		
+		// sheet 생성(액셀의 시트(공간)를 생성)
+		Sheet sheet = workbook.createSheet("lineFriends");
+			
+			
+			
+		// index setting, row 생성
+		int rownum = 0;
+		int columnum = 0;
+		Row row = sheet.createRow(rownum++);
+			
+			
+			
+		// 헤더 설정
+		for(String h : header) {
+			row.createCell(columnum++).setCellValue(h);
+		}
+			
+			
+		
+		// data 설정
+		for(Map<String, String> map : data) {
+			row = sheet.createRow(rownum++);
+			
+			columnum = 0;
+			row.createCell(columnum++).setCellValue(map.get("userid"));
+			row.createCell(columnum++).setCellValue(map.get("usernm"));
+		}
+	
+	
+	
+	
+		// excel file download
+		OutputStream os = response.getOutputStream();
+		workbook.write(os); 
+		
+		
+		
+		// 자원 반납
+		os.flush();
+		os.close();
+		workbook.close();
+		
+		
+		
+		ex)
+		package kr.or.ddit.mvc.view;
+	
+		import java.io.OutputStream;
+		import java.util.List;
+		import java.util.Map;
+		
+		import javax.servlet.http.HttpServletRequest;
+		import javax.servlet.http.HttpServletResponse;
+		
+		import org.apache.poi.ss.usermodel.Row;
+		import org.apache.poi.ss.usermodel.Sheet;
+		import org.apache.poi.ss.usermodel.Workbook;
+		import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+		import org.springframework.web.servlet.view.AbstractView;
+		
+		public class ExcelDownloadView extends AbstractView{
+		
+			@Override
+			protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
+					HttpServletResponse response) throws Exception {
+				
+				// header와 data값을 model에서 가져오기
+				List<String> header = (List<String>) model.get("header");
+				List<Map<String, String>> data = (List<Map<String, String>>) model.get("data");
+				
+				// excel 파일 contentType : application/vnd.ms-excel; UTF-8
+				response.setContentType("application/vnd.ms-excel; UTF-8");
+				
+				// 첨부파일임을 암시
+				response.setHeader("Content-Disposition", "attachment; filename=test.xlsx");
+				
+				// poi 라이브러리를 이용하여 엑셀 파일을 생성
+				Workbook workbook = new XSSFWorkbook();
+				Sheet sheet = workbook.createSheet("lineFriends");
+				
+				int rownum = 0;
+				int columnum = 0;
+				Row row = sheet.createRow(rownum++);
+				
+				// 헤더 설정
+				for(String h : header) {
+					row.createCell(columnum++).setCellValue(h);
+				}
+				
+				// data 설정
+				for(Map<String, String> map : data) {
+					row = sheet.createRow(rownum++);
+					
+					columnum = 0;
+					row.createCell(columnum++).setCellValue(map.get("userid"));
+					row.createCell(columnum++).setCellValue(map.get("usernm"));
+				}
+				
+				OutputStream os = response.getOutputStream();
+				workbook.write(os);
+				
+				os.flush();
+				os.close();
+				
+				workbook.close();
+			}
+		}
+	
+
+
+
+
+
+
+tiles
+	tiles : 웹 페이지의 상단이나 하단 메뉴와 같이 반복적으로 사용되는 부분들에 대한 코드를 분리해서 예쁘게 한 곳에서 관리를 가능하게 해주는 프레임워크.
+	tiles의 name속성 : header, left, content, footer가 있다.
+	
+	
+	
+	pom.xml 단
+	
+		<!-- tiles setting -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-servlet -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-servlet</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	tiles-definition.xml 단
+	
+		// 초기 setting
+		<?xml version="1.0" encoding="ISO-8859-1" ?>
+		<!DOCTYPE tiles-definitions PUBLIC
+		       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+		       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">		
+		
+		<tiles-definitions>
+		</tiles-definitions>
+		
+		
+		
+		
+		
+		// basic template 생성
+		
+		<!--  1. template 생성
+		  2. 개별 페이지에 대한 컨텐츠 영역설정
+		 -->
+		<definition name="basic.layout" template="/WEB-INF/views/layout/layout.jsp">
+			<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+			<put-attribute name="left" value="/WEB-INF/views/layout/left.jsp" />
+			<put-attribute name="content" value="" />
+		</definition>
+		
+		
+		
+		
+		// basic을 extends를 하는 template 생성
+		
+		<!-- 상속을 통해 basic.layout에 설정된 header, left의 기본값을 사용하게 되며
+			 만약 변경을 원한다면 해당 속성을 다른값으로 설정하면 된다.
+			 스프링 컨트롤러에서 리턴하는 viewName에 해당하는 tiles definition이름이 있는지 찾아
+			 동일한 값이 있을 경우 해당 definition을 통해 응답을 생성한다.
+			 
+			 
+			 ex)
+			 tiles.member.list
+			 tiles.member.info
+			 tiles.member.regist
+			 tiles.member.update
+			 
+		 -->
+		<!-- 	<definition name="tiles.memberList" extends="basic.layout">  -->
+		<!-- 		<put-attribute name="content" value="/WEB-INF/views/member/memberListContent.jsp" /> -->
+		<!-- 	</definition> -->
+			
+			
+		<!-- upgrade version -->	
+		<definition name="tiles/*/*" extends="basic.layout"> 
+			<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+		
+		
+				ex)
+					<?xml version="1.0" encoding="ISO-8859-1" ?>
+					<!DOCTYPE tiles-definitions PUBLIC
+					       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+					       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+					<tiles-definitions>
+						
+						<!--  1. template 생성
+							  2. 개별 페이지에 대한 컨텐츠 영역설정
+						 -->
+						<definition name="basic.layout" template="/WEB-INF/views/layout/layout.jsp">
+							<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+							<put-attribute name="left" value="/WEB-INF/views/layout/left.jsp" />
+							<put-attribute name="content" value="" />
+						</definition>
+						
+						
+						<!-- 상속을 통해 basic.layout에 설정된 header, left의 기본값을 사용하게 되며
+							 만약 변경을 원한다면 해당 속성을 다른값으로 설정하면 된다.
+							 스프링 컨트롤러에서 리턴하는 viewName에 해당하는 tiles definition이름이 있는지 찾아
+							 동일한 값이 있을 경우 해당 definition을 통해 응답을 생성한다.
+						 -->
+						<definition name="tiles.memberList" extends="basic.layout"> 
+							<put-attribute name="content" value="/WEB-INF/views/member/memberListContent.jsp" />
+						</definition>
+						
+					</tiles-definitions>
+						
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		application-content.xml 단
+		
+			현재 사용중인 tiles의 버전은 3.0.8 즉 tiles3이다.
+			ex)
+				
+				<!-- tiles view resolver 추가
+					 1. tiles 설정 작업 ==> TilesConfigurer를 통해 설정
+					 2. tils view resolver 등록 -->
+				<bean id="tileConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+					<property name="definitions">
+						<list>
+							<value>classpath:kr/or/ddit/config/tiles/tiles-definition.xml</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+					<property name="order" value="0" />
+					<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+				</bean>
+		
+		
+		
+		
+		
+		
+		
+		
+				
+				
+		jsp 단
+			layout.jsp(basic layout) 단
+			
+			tiles라는 taglib를 사용한다.
+			
+			<tiles:insertAttribute name="header" /> ==> tiles-definition.xml의 name속성이 header인 것을 insert한다.
+			
+			
+			
+			ex)
+				<%@ page language="java" contentType="text/html; charset=UTF-8"
+				    pageEncoding="UTF-8"%>
+				<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+				
+				<!DOCTYPE html>
+				<html lang="en">
+				<head>
+				<meta charset="utf-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+				<meta name="description" content="">
+				<meta name="author" content="">
+				<link rel="icon" href="${pageContext.request.contextPath}/css/favicon.ico">
+				
+				<title>Jsp</title>
+				
+				<!-- <script src="/js/jquery/jquery-1.12.4.js"></script> -->
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+				<script src="${pageContext.request.contextPath}/css/bootstrap.js"></script><!-- Custom styles for this template -->
+				
+				<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap core CSS -->
+				<link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
+				<link href="${pageContext.request.contextPath}/css/blog.css" rel="stylesheet">
+				
+				</head>
+				
+				<body>
+					
+					<nav class="navbar navbar-inverse navbar-fixed-top">
+						<tiles:insertAttribute name="header" />
+					</nav>
+					
+					<div class="container-fluid">
+						<div class="row">
+							<tiles:insertAttribute name="left" />
+							<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+								<tiles:insertAttribute name="content" />
+							</div>
+						</div>
+					</div>
+					
+				</body>
+				</html>		
+		
+		
+			
+			============================================================================================================
+			
+			
+			
+			
+			memberListContent.jsp 단
+			
+				ex)
+					<%@ page language="java" contentType="text/html; charset=UTF-8"
+					    pageEncoding="UTF-8"%>
+					<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+					<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+					
+					<link href="${cp}/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap core CSS -->
+					<link href="${cp}/css/dashboard.css" rel="stylesheet">
+					<link href="${cp}/css/blog.css?v=2" rel="stylesheet">
+					
+					
+					<script>
+						$(document).ready(function(){
+							$("#memberInfo tr").on("click", function(){
+								var userid = $(this).data("userid")
+								console.log("userid = " + userid)
+								document.location = "/memberInfo/view?userid=" + userid;
+							})
+					
+					
+							$("#memberRegistButton").on("click", function(){
+								document.location = "/memberRegist/view"
+							})
+						})
+						
+					</script>
+					
+					tiles : memberListContent.jsp
+					
+					<div class="row">
+						<div class="col-sm-8 blog-main">
+							<h2 class="sub-header">사용자</h2>
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<tr>
+										<th>사용자 아이디</th>
+										<th>사용자 이름</th>
+										<th>사용자 별명</th>
+										<th>등록일시</th>
+									</tr>
+									
+									<tbody id="memberInfo">
+										<c:forEach items="${memList}" var="member">
+										<tr data-userid="${member.userid}">
+											<td>${member.userid}</td>
+											<td>${member.usernm}</td>
+											<td>${member.alias}</td>
+											<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd HH:mm" /> </td>
+										</tr>
+										</c:forEach>
+									
+									</tbody>
+									
+								</table>
+							</div>
+					
+							<a class="btn btn-default pull-right" id="memberRegistButton">사용자 등록</a>
+					
+							<div class="text-center">
+								<ul class="pagination">
+								
+									<c:forEach var="i" begin="1" end="${pageCnt}" step="1">
+										<c:choose>
+											<c:when test="${pageNum == i}">
+												<li class="active"><span>${i}</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="${pageContext.request.contextPath}/memberList/view?pageNum=${i}">${i}</a></li>						
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+		
+		
+		
+		
+		
+		
+		
+		java 단
+			MemberListController 단
+				return 값을 "tiles.memberList" 로 변경
+				==> tiles-definition.xml 에 설정한 definition절의 name값을 작성한다.
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+Spring custom tag 
+	- message properties setting (국제화)
+
+
+		root-context.xml 단
+			: properties 파일 인식 기능
+			추가
+			<value>classpath:kr/or/ddit/message/msg</value>
+		
+		
+			ex)
+			<!-- messageSource 등록 : bean id는 messageSource로 정해져 있다. 
+				 번들메시지_언어코드_국가코드.properties ==> 번들메세지(kr/or/ddit/message/msg)
+				 kr/or/ddit/message/msg_kr.properites
+			-->
+			<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+				<property name="basenames">
+					<list>
+						<value>classpath:kr/or/ddit/message/error</value>
+						<value>classpath:kr/or/ddit/message/msg</value>
+					</list>
+				</property>
+			</bean>	
+		
+
+
+
+
+		application-context.xml 단
+			: locale(위치정보) 셋팅 및 locale 변경을 감지하는 interceptor 생성
+			
+			<!-- localeResolver -->
+			<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+			
+			<!-- locale 변경 감지 interceptor -->
+			<mvc:interceptors>
+				<mvc:interceptor>
+					<mvc:mapping path="/**"/>
+					<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+						<property name="paramName" value="lang" />
+					</bean>
+				</mvc:interceptor>
+			</mvc:interceptors>	
+			
+		
+		
+		
+		
+		
+		login/view.jsp 단
+		
+			추가
+			<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+		
+		
+			변경
+			<form id="loginForm" class="form-signin" action="${pageContext.request.contextPath}/login/process" method="post">
+		        <h2 class="form-signin-heading"><spring:message code="login.signin" /></h2>
+		        <label for="inputEmail" class="sr-only"><spring:message code="login.userid" /></label>
+		        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="userid" value="brown" required autofocus>
+		        <label for="inputPassword" class="sr-only"><spring:message code="login.password" /></label>
+		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="pass" value="brownPass" required>
+		        <div class="checkbox">
+		          <label>
+		            <input type="checkbox" value="remember-me"> <spring:message code="login.rememberme" />
+		          </label>
+		        </div>
+		        <button class="btn btn-lg btn-primary btn-block" type="button" id="signIn">Sign in</button>
+		     </form>
+		
+		
+		
+		
+		
+		
+		msg.properties 생성 및 다음을 작성
+			
+			## sign in, userid, password, rememberme
+			login.signin=로그인
+			login.userid=사용자 아이디
+			login.password=사용자 비밀번호
+			login.rememberme=아이디 기억하기
+		
+		
+		
+		
+		msg_en.properties 생성 및 다음을 작성
+			
+			## sign in, userid, password, rememberme
+			login.signin=Please sign in
+			login.userid=User id
+			login.password=User Password
+			login.rememberme=Remember me
+		
+		
+		
+		
+		
+view Resolver
+상황 : 
+	tilesViewResolver				order 0
+	beanViewResolver				order 1
+	internalResourceViewResolver	order 2
+		
+만약 controller가 tiles/member/list라는 viewName-문자열을 리턴하면
+	
+	1. viewResolver 우선순위에 따라 tilesViewResolber를 먼저 적용
+		. tiles-definition중에 viewName("tiles/member/list")와 동일한
+			definition을 찾음
+			==> 존재. ==> 해당 definition으로 응답 생성
+			
+
+
+만약 controller가 jsonView는 viewName-문자열을 리턴하면
+	
+	1. viewResolver 우선순위에 따라 tilesViewResolber를 먼저 적용
+		. tiles-definition중에 viewName("jsonView")와 동일한
+			definition을 찾음
+			==> 존재하지 않음
+	
+	2. 후순위 설정에 따라 beanNameViewResolver가 적용됨
+		. viewName과 동일한 이름의 spring bean이 존재하면 해당 빈을 view객체로 사용
+		==> jsonView (MappingJackson2JsonView) 존재
+			해당 view 객체로 응답을 생성	
+		
+
+만약 controller가 main/view는 viewName-문자열을 리턴하면
+	
+	1. viewResolver 우선순위에 따라 tilesViewResolber를 먼저 적용
+		. tiles-definition중에 viewName("main/view")와 동일한
+			definition을 찾음
+			==> 존재하지 않음
+	
+	2. 후순위 설정에 따라 beanNameViewResolver가 적용됨
+		. viewName과 동일한 이름의 spring bean이 존재하면 해당 빈을 view객체로 사용
+		==> main/view라는 이름의 스프링 빈이 존재하지 않음
+	
+	3. 후순위 설정에 따라 internalResourceViewResolver가 적용됨
+		==> 해당 리소스가 존재하지 않아도 무조건 응답을 보낸다 ==> 404로 응답이 생성될 수 있음
+			** 해당 사유로 인해 internalResourceViewResolver는 viewResolver설정에서 
+				가장 후순위로 설정하는 것이 일반적이다.
 		
 		
