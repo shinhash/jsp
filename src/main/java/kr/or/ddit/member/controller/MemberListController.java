@@ -44,5 +44,68 @@ public class MemberListController{
 //		return "member/memberList";
 		return "tiles/member/memberListContent";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/listAjaxPage")
+	public String listAjaxPage() {
+		return "tiles/member/memberListAjaxPage";
+	}
+	
+	
+	// 페이지 요청(/memberList/view와 다르게 pageNum, pageSize 파라미터가 반드시 존재한다는 기점으로 시작)
+	@RequestMapping("/listAjax")
+	public String listAjax(PageVO pageVO, Model model) {
+		
+		if(pageVO.getPageNum() == 0) {
+			pageVO.setPageNum(1);
+		}
+		logger.debug("pageVO : {}", pageVO);
+		
+		Map<String, Object> memMap = memService.selectMemberPage(pageVO);
+		
+		List<MemberVO> memListPage = (List<MemberVO>) memMap.get("memListPage");
+		int pageCnt = (Integer) memMap.get("pageCnt");
+		
+		model.addAttribute("pageNum", pageVO.getPageNum());
+		model.addAttribute("memList", memListPage);
+		model.addAttribute("pageCnt", pageCnt);
+		
+		return "jsonView";
+	}
+	
+	
+	
+	
+	
+	
+	
+	// 페이지 요청(/memberList/view와 다르게 pageNum, pageSize 파라미터가 반드시 존재한다는 기점으로 시작)
+	@RequestMapping("/listAjaxHTML")
+	public String listAjaxHTML(PageVO pageVO, Model model) {
+		
+		logger.debug("pageVO : {}", pageVO);
+		
+		Map<String, Object> memMap = memService.selectMemberPage(pageVO);
+		
+		List<MemberVO> memListPage = (List<MemberVO>) memMap.get("memListPage");
+		int pageCnt = (Integer) memMap.get("pageCnt");
+		
+		model.addAttribute("pageNum", pageVO.getPageNum());
+		model.addAttribute("memList", memListPage);
+		model.addAttribute("pageCnt", pageCnt);
+		
+		// 응답을 html ==> jsp로 생성
+		return "member/listAjaxHTML";
+	}
+		
+	
+	
+	
 
 }

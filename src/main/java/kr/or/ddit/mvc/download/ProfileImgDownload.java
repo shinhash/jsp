@@ -30,6 +30,7 @@ public class ProfileImgDownload extends AbstractView{
 		
 		response.setContentType("application/octet-stream; charset=UTF-8");
 		
+		// UTF-8 문자열을 ISO-8859-1 문자열로 변환 ==> 브라우저는 ISO-8859-1 문자열을 인식하기 때문이다.
 		String downFileName = new String(member.getRealfilename().getBytes("UTF-8"), "ISO-8859-1");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + downFileName + "\"");
 		

@@ -1,5 +1,7 @@
 package kr.or.ddit.member.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -81,6 +83,13 @@ public class MemberVO {
 	}
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
+	}
+	public String getFmtReg_dt() {
+		if(reg_dt != null) {
+			return new SimpleDateFormat("yyyy-MM-dd HH:MM").format(reg_dt);
+		}else {
+			return "";
+		}
 	}
 
 	

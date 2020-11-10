@@ -1,0 +1,139 @@
+memberListContent ==> memberListAjax
+	
+	==> 페이지의 재호출이 아닌 json데이터만을 재호출 하기 때문에 성능 향상 기대 가능
+	
+	1. form전송을 Ajax 처리로 변경
+	2. Ajax 처리시 화면 로딩이 완료된 이후에 회원 리스트 정보 요청
+	3. 요청된 정보를 controller단에서 처리 후 model객체에 삽입
+	4. ajax 요청 처리 후 요청이 success일 경우 model객체에 삽입된 데이터를 가지고 태그 문자열을 생성
+	5. 생성한 태그 문자열을 특정공간에 삽입
+	
+	
+	
+	***
+		ajax call을 통해 1페이지에 해당하는 사용자정보를 json으로 받는다.
+		ajax는 클라이언트 사이드이기 때문에 tag라이브러리(jstl)를 적용할 수 없다.(jstl의 적용 사이드는 서버 사이드 이다.)
+		즉 ajax단에서는 jstl을 사용할 수 없다.
+		또한 model객체에 추가된 어트리뷰트값을 조회하는것이 불가능하다.
+		때문에 이때는 vo단에서 문자열을 포맷한 값을 가져와서 사용한다.
+	
+			memberVO 단
+			
+			public String getFmtReg_dt() {
+				if(reg_dt != null) {
+					return new SimpleDateFormat("yyyy-MM-dd HH:MM").format(reg_dt);
+				}else {
+					return "";
+				}
+			}
+
+			
+			
+			
+		서버 사이드와 클라이언트 사이드의 차이
+			실행순서
+				jsp 렌더링(서버 사이드) --> 
+				ajax 요청(클라이언트 사이드) --> 
+				ajax url 실행(클라이언트 사이드) --> 
+				결과반환(클라이언트 사이드) --> 
+				ajax success 실행(클라이언트 사이드)
+			
+			즉 서버 사이드(taglib 및 jsp)가 먼저 실행되고 클라이언트 사이드가 실행된다.
+			
+			
+			
+			
+			
+	ajax 사용 예시
+	
+	
+		memberListAjaxPage.jsp 단	
+		
+			$.ajax({
+					url			: "/memberList/listAjax",
+					data		: {pageNum : p, pageSize : 5}, // form 형태 타입
+					//data		: "pageNum=1&pageSize=5", // query string 형태 타입
+					//data		: JSON.stringify({pageNum : 1, pageSize : 5}), // json 형태 타입 
+									// ==> controller에서 requestBody를 사용해야한다. JSON <---> JAVA OBJECT(마샬링 or 언마샬링)
+					method		: "get",
+					success		: function(res){
+						
+						var temp = 1;
+		
+						// list navigation
+						var pagination = "";
+						for(var i=1; i<=res.pageCnt; i++){
+							if(res.pageVO.pageNum == i){
+								pagination += "<li class='active'><span>"+i+"</span></li>";
+							}else{
+		 						pagination += "<li><a href='${pageContext.request.contextPath}/memberList/listAjaxPage?pageNum="+i+"'>"+i+"</a></li>";
+								//pagination += "<li><a href='javascript:memberListAjax("+i+")'>"+i+"</a></li>";
+							}
+						}
+						
+		
+						// memberList tbody 영역에 들어갈 html문자열 생성
+						var tbody = "";
+						for(var i=0; i<res.memList.length; i++){
+							var member = res.memList[i];
+							tbody += "<tr data-userid='"+member.userid+"'>";
+							tbody += "	<td>"+member.userid+"</td>";
+							tbody += "	<td>"+member.usernm+"</td>";
+							tbody += "	<td>"+member.alias+"</td>";
+							tbody += "	<td>"+member.fmtReg_dt+"</td>";
+							tbody += "</tr>";
+						}
+		
+						
+						$("#memberInfo").html(tbody);
+						$(".pagination").html(pagination);
+						
+					}
+				});
+			
+			
+			
+	ajax에서 반환 받는 타입은 json만이 아니라 html형식으로도 가능하다.
+			==> jsp단에서 처리후 해당 결과 html문자를 반환받는다.	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
