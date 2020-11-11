@@ -111,7 +111,7 @@ public class LoginController {
 	//		   jsp/servlet 기반의 request역할을 담당
 	@RequestMapping(path="/process", params = {"userid"})
 	public String procecss(String userid, String pass, MemberVO memVO,
-					@RequestBody String body,
+//					@RequestBody String body,
 					HttpSession session, Model model, 
 					@RequestParam(name = "email", 
 								  required = false, 
@@ -121,14 +121,7 @@ public class LoginController {
 		logger.debug("LoginController.process()member : {}", dbmember);
 		logger.debug("user_id : {}", user_id);
 		
-		
-		
-		
-		
-		logger.debug("body : {}", body);
-		
-		
-		
+//		logger.debug("body : {}", body);
 		
 		
 		// db에서 조회한 사용자 정보가 존재하면 ==> main.jsp로 이동

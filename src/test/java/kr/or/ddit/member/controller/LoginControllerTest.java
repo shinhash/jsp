@@ -36,8 +36,8 @@ public class LoginControllerTest extends WebTestConfig{
 	@Test
 	public void processSuccessTest() throws Exception {
 		mockMvc.perform(post("/login/process")
-							.param("userid", "brown")
-							.param("pass", "brownPass"))
+							.param("userid", "sally")
+							.param("pass", "sallyPass"))
 					.andExpect(status().is(200))
 					.andExpect(view().name("main"))
 					.andExpect(model().attributeExists("to_day"));

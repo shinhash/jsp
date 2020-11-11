@@ -29,5 +29,4 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		return true;
 	}
-	
 }

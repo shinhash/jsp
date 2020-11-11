@@ -32,5 +32,6 @@ public class IocTest {
 		BoardServiceI boardServiceC = context.getBean("boardServiceC", BoardService.class);
 		logger.debug("boardServiceC.getBoard(1) : {}", boardServiceC.getBoard(1));
 	}
-	
 }
+
+

@@ -48,7 +48,7 @@ public class MemberUpdateController{
 	@RequestMapping(path="/update", method = RequestMethod.POST)
 	public String memberInfoUpdate(MemberVO upMember, @RequestPart("file") MultipartFile file) {
 		
-		upMember.setUserid(memId);
+		upMember.setUserid(memId);			
 		
 		int updateCnt = 0;
 		
@@ -65,7 +65,6 @@ public class MemberUpdateController{
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-			
 			
 			upMember.setFilename(filename);
 			upMember.setRealfilename(realfilename);

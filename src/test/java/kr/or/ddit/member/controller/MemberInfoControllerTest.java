@@ -20,7 +20,7 @@ public class MemberInfoControllerTest extends WebTestConfig{
 											.andReturn();
 		
 		ModelAndView mvc = result.getModelAndView();
-		assertEquals("member/memberInfo", mvc.getViewName());
+		assertEquals("tiles/member/memberInfoContent", mvc.getViewName());
 	}
 
 }

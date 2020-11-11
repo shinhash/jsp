@@ -18,7 +18,7 @@ public class MemberListControllerTest extends WebTestConfig{
 												.andDo(print())
 												.andReturn();
 		ModelAndView mvc = result.getModelAndView();
-		assertEquals("member/memberList", mvc.getViewName());
+		assertEquals("tiles/member/memberListContent", mvc.getViewName());
 	}
 
 }

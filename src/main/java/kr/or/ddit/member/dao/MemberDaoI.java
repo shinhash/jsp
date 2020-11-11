@@ -11,9 +11,9 @@ public interface MemberDaoI {
 
 	MemberVO getMember(String userid);
 	
-	List<MemberVO> selectMemberPage(PageVO pageVO, SqlSession sqlSession);
+	List<MemberVO> selectMemberPage(PageVO pageVO);
 
-	int selectMemberTotalCnt(SqlSession sqlSession);
+	int selectMemberTotalCnt();
 
 	int insertMember(MemberVO memVO);
 	

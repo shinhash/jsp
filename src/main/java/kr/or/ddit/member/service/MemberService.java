@@ -18,7 +18,6 @@ import kr.or.ddit.member.model.MemberVO;
 @Service("memberService")
 public class MemberService implements MemberServiceI{
 	
-	
 	@Resource(name = "memberRepository")
 	private MemberDaoI memDao;
 
@@ -32,9 +31,9 @@ public class MemberService implements MemberServiceI{
 		
 		// 동일한 SqlSession 정보를 인자로 전달하여 같은 트렌젝션안에서 처리하도록 한다.
 		// 같은 공간에서 작업
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
-		List<MemberVO> memListPage = memDao.selectMemberPage(pageVO, sqlSession);
-		int totalCnt = memDao.selectMemberTotalCnt(sqlSession);
+//		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		List<MemberVO> memListPage = memDao.selectMemberPage(pageVO);
+		int totalCnt = memDao.selectMemberTotalCnt();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageCnt = (int) Math.ceil(totalCnt / ((float)pageVO.getPageSize()));
@@ -42,7 +41,7 @@ public class MemberService implements MemberServiceI{
 		map.put("memListPage", memListPage);
 		map.put("pageCnt", pageCnt);
 		
-		sqlSession.close();
+//		sqlSession.close();
 		
 		return map;
 	}

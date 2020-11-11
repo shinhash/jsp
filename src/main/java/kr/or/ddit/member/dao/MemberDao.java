@@ -34,24 +34,22 @@ public class MemberDao implements MemberDaoI{
 	
 	@Override
 	public MemberVO getMember(String userid) {
-		MemberVO memVO = sqlSession.selectOne("member.getMember", userid);
-		return memVO;
+		return sqlSession.selectOne("member.getMember", userid);
 	}
 
 	@Override
-	public List<MemberVO> selectMemberPage(PageVO pageVO, SqlSession sqlSession) {
+	public List<MemberVO> selectMemberPage(PageVO pageVO) {
 		return sqlSession.selectList("member.selectMemberPage", pageVO);
 	}
 
 	@Override
-	public int selectMemberTotalCnt(SqlSession sqlSession) {
+	public int selectMemberTotalCnt() {
 		return sqlSession.selectOne("member.selectMemberTotalCnt");
 	}
 
 	@Override
 	public int insertMember(MemberVO memVO) {
 		
-		int insertCnt =  0;
 		
 //		logger.debug("first insert 시작전");
 //		sqlSession.insert("member.insertMember", memVO);
@@ -69,23 +67,12 @@ public class MemberDao implements MemberDaoI{
 		
 		
 		
-
-		insertCnt = sqlSession.insert("member.insertMember", memVO);
-	
-		return insertCnt;
+		return sqlSession.insert("member.insertMember", memVO);
 	}
 
 	@Override
 	public int updateMember(MemberVO upMember) {
-		int updateCnt = sqlSession.update("member.updateMember", upMember);
-		
-		if(updateCnt == 1) {
-//			sqlSession.commit();
-		}else {
-//			sqlSession.rollback();
-		}
-//		sqlSession.close();
-		return updateCnt;
+		return sqlSession.update("member.updateMember", upMember);
 	}
 
 

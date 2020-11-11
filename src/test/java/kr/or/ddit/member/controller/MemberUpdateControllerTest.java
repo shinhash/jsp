@@ -27,12 +27,13 @@ public class MemberUpdateControllerTest extends WebTestConfig{
 	@Test
 	public void memberUpdateViewTest() throws Exception {
 		MvcResult result = mockMvc.perform(get("/memberUpdate/view")
-														.param("userid", "user004"))
+														.param("userid", "user001"))
 												.andDo(print())
 												.andReturn();
 		ModelAndView mvc = result.getModelAndView();
-		assertEquals("member/memberUpdate", mvc.getViewName());
+		assertEquals("tiles/member/memberUpdateContent", mvc.getViewName());
 	}
+	
 	
 	
 	
@@ -47,13 +48,13 @@ public class MemberUpdateControllerTest extends WebTestConfig{
 		
 		// is(302) ==> 리다이렉션 응답(해당 url에 대한 재요청)
 		
-		String userid = "user004";
+		String userid = "user001";
 		mockMvc.perform(fileUpload("/memberUpdate/update")
 											.file(file)
-										.param("userid", userid)
-										.param("pass", "user004")
-										.param("usernm", "user004")
-										.param("alias", "user004")
+										.param("userid", "user001")
+										.param("pass", "user001")
+										.param("usernm", "user001")
+										.param("alias", "user001")
 										.param("addr1", "")
 										.param("addr2", "")
 										.param("zipcode", "")

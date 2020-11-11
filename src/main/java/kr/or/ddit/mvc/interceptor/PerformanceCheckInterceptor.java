@@ -36,9 +36,6 @@ public class PerformanceCheckInterceptor extends HandlerInterceptorAdapter{
 		logger.debug("startTime : {}", (long)request.getAttribute("startTime"));
 		logger.debug("메서드 : {} || 걸린 시간 time : {}", handler, (endTime - (long)request.getAttribute("startTime")));
 	}
-
-	
-
 	 
 }
 

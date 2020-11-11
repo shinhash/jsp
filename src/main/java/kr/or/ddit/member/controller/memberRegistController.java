@@ -72,7 +72,11 @@ public class memberRegistController{
 		}
 		
 		
-		int insertMemberCnt = memService.insertMember(memVO);
+		int insertMemberCnt = 0;
+		try {
+			insertMemberCnt = memService.insertMember(memVO);
+		}catch(Exception e) { }
+		
 		if(insertMemberCnt == 1) {
 			return "redirect:/memberList/view";
 		}else {
