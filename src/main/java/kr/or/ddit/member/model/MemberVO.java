@@ -37,7 +37,7 @@ public class MemberVO {
 
 	
 	public MemberVO(String userid, String pass, String usernm, String alias, String addr1, String addr2,
-			String zipcode, String filename, String realfilename, Date reg_dt) {
+			String zipcode, String filename, String realfilename) {
 		this.userid = userid;
 		this.pass = pass;
 		this.usernm = usernm;
@@ -47,7 +47,6 @@ public class MemberVO {
 		this.zipcode = zipcode;
 		this.filename = filename;
 		this.realfilename = realfilename;
-		this.reg_dt = reg_dt; 
 	}
 	
 	

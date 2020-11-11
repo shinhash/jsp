@@ -18,5 +18,7 @@ public interface MemberDaoI {
 	int insertMember(MemberVO memVO);
 	
 	int updateMember(MemberVO upMember);
+
+	List<MemberVO> selectAllMember();
 	
 }

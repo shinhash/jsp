@@ -18,7 +18,9 @@
   <!-- 부모 생성은 1개가 최대이다. ==> 부모의 이름이 중복되어서는 안된다. 또한 해당 부모의 이름은 contextConfigLocation이며 고정되는 이름이다. -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:kr/or/ddit/config/spring/root-context.xml</param-value>
+  	<param-value>classpath:kr/or/ddit/config/spring/root-context.xml
+  				 classpath:kr/or/ddit/config/spring/aop-context.xml
+  				 classpath:kr/or/ddit/config/spring/datasource-context.xml</param-value>
   </context-param>
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

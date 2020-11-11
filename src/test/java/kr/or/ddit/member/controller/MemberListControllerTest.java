@@ -1,4 +1,4 @@
-package kr.or.ddit.member;
+package kr.or.ddit.member.controller;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

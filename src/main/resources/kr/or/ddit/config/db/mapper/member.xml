@@ -5,6 +5,17 @@
   
 <mapper namespace="member">
 
+
+  <select id="selectAllMember" resultType="MemberVO">
+  	
+  	SELECT * 
+  	FROM users
+  	
+  </select>
+
+
+
+
   <select id="getMember" parameterType="String" resultType="MemberVO">
   
     SELECT * 

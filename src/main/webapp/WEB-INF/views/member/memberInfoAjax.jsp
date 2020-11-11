@@ -149,7 +149,7 @@
 		<div class="form-group">
 			<label for="req_dt" class="col-sm-2 control-label">등록일자</label>
 			<div class="col-sm-10">
-				<label class="control-label" id="reg_dt"> </label>
+				<label class="control-label" id="reg_dt"></label>
 			</div>
 		</div>
 		
