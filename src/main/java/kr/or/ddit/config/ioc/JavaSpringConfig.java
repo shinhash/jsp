@@ -32,7 +32,7 @@ public class JavaSpringConfig {
 		
 		// 아래와 같이 직접 new 연산자를 통해 생성한 객체는 스프링 빈이 아니다
 		// @Bean 어노테이션이 붙은 메서드를 호출해야 스프링 컨테이너에서 관리되는 스프링 빈을 얻을 수 있다.
-		//boardService.setBoardRepository(new boardRepository());
+		//boardService.setBoardRepository(boardRepository());
 		return boardService;
 	}
 	
