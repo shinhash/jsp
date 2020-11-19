@@ -22,7 +22,6 @@ public class YogurtBatchApplication {
 																		"classpath:kr/or/ddit/config/spring/transaction-context.xml");
 		
 		
-		
 		// jobLauncher, job 스프링 빈 DL
 		JobLauncher jobLauncher = context.getBean("jobLauncher", JobLauncher.class);
 		Job yogurtJob = context.getBean("yogurtJob", Job.class);
