@@ -1,0 +1,515 @@
+spring batch
+
+batch : 반복적인 작업을 개발자 스스로가 하지 않고 프로그램으로 처리하도록 하는 스프링 설정
+		일괄처리 혹은 반복작업 이라고도 한다.
+
+개발자가 만들어야 하는 부분
+reader		: implements ItemReader<T>
+
+processor	: implements ItemProcessor<I, O> ==> input, output
+
+writer		: implements ItemWriter<T>
+
+
+package : kr.or.ddit.batch.basic
+BasicReader<String>
+BasicProcessor<String, String>
+BasicWriter<String>
+
+
+
+
+
+
+
+
+
+pom.xml 단
+	<!-- spring batch -->
+	<!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core -->
+	<dependency>
+	    <groupId>org.springframework.batch</groupId>
+	    <artifactId>spring-batch-core</artifactId>
+	    <version>3.0.10.RELEASE</version>
+	</dependency>
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-infrastructure -->
+	<dependency>
+	    <groupId>org.springframework.batch</groupId>
+	    <artifactId>spring-batch-infrastructure</artifactId>
+	    <version>3.0.10.RELEASE</version>
+	</dependency>
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-test -->
+	<dependency>
+	    <groupId>org.springframework.batch</groupId>
+	    <artifactId>spring-batch-test</artifactId>
+	    <version>3.0.10.RELEASE</version>
+	    <scope>test</scope>
+	</dependency>
+	
+	
+	
+	
+	
+basicReader 단
+	package kr.or.ddit.batch.basic;
+
+	import java.util.ArrayList;
+	import java.util.List;
+	
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+	import org.springframework.batch.item.ItemReader;
+	import org.springframework.batch.item.NonTransientResourceException;
+	import org.springframework.batch.item.ParseException;
+	import org.springframework.batch.item.UnexpectedInputException;
+	
+	
+	public class BasicReader implements ItemReader<String>{
+	
+		
+		private static final Logger logger = LoggerFactory.getLogger(BasicReader.class);
+	
+		private List<String> list;
+		private int index;
+		
+		public BasicReader() {
+			// list 객체에 5개의 임의 값을 생성
+			list = new ArrayList<String>();
+			list.add("brown");
+			list.add("cony");
+			list.add("ryan");
+			list.add("beans");
+			list.add("tiger");
+		}
+		
+		
+		// return 값이 Processor에게 전달
+		// 더이상 읽을 데이터가 없을때 null을 리턴 ==> spring batch 모듈에서 읽을 데이터가 없다고 인식
+		@Override
+		public String read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+			
+			logger.debug("===================Read=======================");
+			if(index < list.size()) {
+				String item = list.get(index);
+				logger.debug("item : {}", item);
+				return list.get(index++);			
+			}
+			return null;
+		}
+	}
+	
+
+
+
+basicProcessor 단
+	package kr.or.ddit.batch.basic;
+	
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+	import org.springframework.batch.item.ItemProcessor;
+	
+	public class BasicProcessor implements ItemProcessor<String, String>{
+	
+		
+		private static final Logger logger = LoggerFactory.getLogger(BasicProcessor.class);
+	
+		
+		@Override
+		public String process(String item) throws Exception {
+			logger.debug("============Processor=============");
+			logger.debug("processor : {} | {}", item, item+"_modified");
+			return item + "_modified";
+		}
+	}
+	
+	
+basicWriter 단
+	package kr.or.ddit.batch.basic;
+	
+	import java.util.List;
+	
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+	import org.springframework.batch.item.ItemWriter;
+	
+	public class BasicWriter implements ItemWriter<String>{
+	
+		
+		private static final Logger logger = LoggerFactory.getLogger(BasicWriter.class);
+	
+		
+		@Override
+		public void write(List<? extends String> items) throws Exception {
+			logger.debug("===========writer===============");
+			logger.debug("items : {}", items);
+			logger.debug("================================");
+		}
+	
+	}
+
+
+
+
+
+
+실제 실행 class 단
+	package kr.or.ddit.batch.basic;
+
+	import org.springframework.batch.core.Job;
+	import org.springframework.batch.core.JobParameters;
+	import org.springframework.batch.core.JobParametersInvalidException;
+	import org.springframework.batch.core.launch.JobLauncher;
+	import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+	import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+	import org.springframework.batch.core.repository.JobRestartException;
+	import org.springframework.context.ApplicationContext;
+	import org.springframework.context.support.ClassPathXmlApplicationContext;
+	
+	
+	public class BasicBatchApplication {
+	
+		public static void main(String[] args) {
+			
+			// batch-context.xml을 이용하여 스프링 컨테이너를 생성
+			ApplicationContext context = new ClassPathXmlApplicationContext("classpath:kr/or/ddit/config/spring/batch-context.xml");
+			
+			// jobLauncher, job 스프링 빈 DL
+			JobLauncher jobLauncher = context.getBean("jobLauncher", JobLauncher.class);
+			Job basicJob = context.getBean("basicJob", Job.class);
+			
+			try {
+				jobLauncher.run(basicJob, new JobParameters());
+			} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
+					| JobParametersInvalidException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+
+
+
+
+
+batch-context.xml 단
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:batch="http://www.springframework.org/schema/batch"
+		xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+		<!-- job Repository : db를 사용하지 않는 형식상의 jobRepository-MapJobRepositoryFactoryBean -->
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
+		
+		<!-- job launcher : SimpleLauncher -->
+		<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+			<property name="jobRepository" ref="jobRepository"/>
+		</bean>
+		
+		<!-- reader -->
+		<bean id="basicReader" class="kr.or.ddit.batch.basic.BasicReader"/>
+		<bean id="basicProcessor" class="kr.or.ddit.batch.basic.BasicProcessor"/>
+		<bean id="basicWriter" class="kr.or.ddit.batch.basic.BasicWriter"/>
+		
+		<!-- step에서 기본적으로 사용하는 트랜잭션 매니져, 이름이 정해짐 - transactionManager 
+			 기본이름을 사용하지 않거나 기존에 이미 동일한 이름의 bean이 존재할 경우
+			 tasklet transaction-manager 속성에 등록 -->
+		<bean id="resourcelessTX" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"></bean>
+		
+		<batch:job id="basicJob">
+			<batch:step id="basicStep">
+				<batch:tasklet transaction-manager="resourcelessTX">
+					<batch:chunk reader="basicReader" 
+								 processor="basicProcessor" 
+								 writer="basicWriter" 
+								 commit-interval="1"/>
+				</batch:tasklet>
+			</batch:step>
+		</batch:job>
+		
+	
+	</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+주기 설정
+
+Cron 초 분 시 일 월 요일
+모든 값 : *
+1 * * * * *		: 매 1초 마다 실행 (1분 1초, 2분 1초 ......., 3분 1초)
+*/5 * * * * *	: 5초마다 실행
+
+
+설정한 시간값으로 특정 설정을 자동실행한다.
+
+
+
+task-scheduler-context.xml 단 
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:task="http://www.springframework.org/schema/task"
+		xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+		<bean id="logTask" class="kr.or.ddit.batch.basic.LogTask"/>
+	
+		<task:scheduler id="scheduler"/>
+		<task:scheduled-tasks scheduler="scheduler">
+			<task:scheduled ref="logTask" method="logging" cron="*/3 * * * * *"/>
+		</task:scheduled-tasks>
+	
+	</beans>
+	
+	
+	
+	
+LogTask.java 단 
+	package kr.or.ddit.batch.basic;
+	
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+	
+	public class LogTask {
+	
+		int count;
+		private static final Logger logger = LoggerFactory.getLogger(LogTask.class);
+		
+		public void logging() {
+			logger.debug("logging() : {}", count++);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+BasicTaskApplication.java 단
+	package kr.or.ddit.batch.basic;
+	
+	import org.springframework.context.ApplicationContext;
+	import org.springframework.context.support.ClassPathXmlApplicationContext;
+	
+	public class BasicTaskApplication {
+	
+		public static void main(String[] args) {
+			
+			// task-scheduler-context.xml을 이용하여 스프링 컨테이너를 생성
+			ApplicationContext context = new ClassPathXmlApplicationContext("classpath:kr/or/ddit/config/spring/task-scheduler-context.xml");
+		}
+	}
+==> LogTask.java를 매 3초마다 실행하는 설정
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+batch를 일정 시간값마다 실행하는 설정
+
+batch-task-context.xml 단
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:batch="http://www.springframework.org/schema/batch"
+		xmlns:task="http://www.springframework.org/schema/task"
+		xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+		<!-- job Repository : db를 사용하지 않는 형식상의 jobRepository-MapJobRepositoryFactoryBean -->
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
+		
+		
+		<!-- job launcher : SimpleLauncher -->
+		<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+			<property name="jobRepository" ref="jobRepository"/>
+		</bean>
+		
+		
+		<!-- reader -->
+		<bean id="basicReader" class="kr.or.ddit.batch.basic.BasicReader"/>
+		<bean id="basicProcessor" class="kr.or.ddit.batch.basic.BasicProcessor"/>
+		<bean id="basicWriter" class="kr.or.ddit.batch.basic.BasicWriter"/>
+		
+		
+		<!-- step에서 기본적으로 사용하는 트랜잭션 매니져, 이름이 정해짐 - transactionManager 
+			 기본이름을 사용하지 않거나 기존에 이미 동일한 이름의 bean이 존재할 경우
+			 tasklet transaction-manager 속성에 등록 -->
+		<bean id="resourcelessTX" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"></bean>
+		
+		
+		<!-- restartable : 재시작에 대한 여부
+			 allow-start-if-complete : step작업이 완료되었을 경우 다시 시작하는지에 대한 여부 
+			 commit-interval : 한번에 commit를 할 개수 설정 -->
+		<batch:job id="basicJob" restartable="true">
+			<batch:step id="basicStep" allow-start-if-complete="true">
+				<batch:tasklet transaction-manager="resourcelessTX">
+					<batch:chunk reader="basicReader" 
+								 processor="basicProcessor" 
+								 writer="basicWriter" 
+								 commit-interval="2"/>
+				</batch:tasklet>
+			</batch:step>
+		</batch:job>
+		
+		
+		<bean id="basicTask" class="kr.or.ddit.batch.basic.BasicBatchTask">
+			<property name="jobLauncher" ref="jobLauncher"/>
+			<property name="basicJob" ref="basicJob"/>
+		</bean>
+	
+		<task:scheduler id="scheduler"/>
+		<task:scheduled-tasks scheduler="scheduler">
+			<task:scheduled ref="basicTask" method="task" cron="*/5 * * * * *"/>
+		</task:scheduled-tasks>
+		
+	</beans>
+	
+	
+	
+	
+BasicBatchTask.java 단
+	package kr.or.ddit.batch.basic;
+	
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+	import org.springframework.batch.core.Job;
+	import org.springframework.batch.core.JobParameters;
+	import org.springframework.batch.core.JobParametersInvalidException;
+	import org.springframework.batch.core.launch.JobLauncher;
+	import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+	import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+	import org.springframework.batch.core.repository.JobRestartException;
+	
+	public class BasicBatchTask {
+		
+		private static final Logger logger = LoggerFactory.getLogger(BasicBatchTask.class);
+		
+		private JobLauncher jobLauncher;
+		private Job basicJob;
+		
+		public void task() {
+			logger.debug("==================task()========================");
+			try {
+				jobLauncher.run(basicJob, new JobParameters());
+			} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
+					| JobParametersInvalidException e) {
+				e.printStackTrace();
+			}
+			logger.debug("================================================");
+		}
+	
+		public JobLauncher getJobLauncher() {
+			return jobLauncher;
+		}
+		public void setJobLauncher(JobLauncher jobLauncher) {
+			this.jobLauncher = jobLauncher;
+		}
+	
+		public Job getBasicJob() {
+			return basicJob;
+		}
+		public void setBasicJob(Job basicJob) {
+			this.basicJob = basicJob;
+		}
+	}
+
+
+
+
+
+BasicBatchTaskApplication.java 단
+	package kr.or.ddit.batch.basic;
+	
+	import org.springframework.context.ApplicationContext;
+	import org.springframework.context.support.ClassPathXmlApplicationContext;
+	
+	public class BasicBatchTaskApplication {
+	
+		public static void main(String[] args) {
+			
+			// batch-context.xml을 이용하여 스프링 컨테이너를 생성
+			ApplicationContext context = new ClassPathXmlApplicationContext("classpath:kr/or/ddit/config/spring/batch-task-context.xml");
+		}
+	}
+==> 설정한 시간마다 특정 설정을 반복 수행하는 기능
+	
+
+
+
+
+=======================================================================================================================================
+오후
+
+
+
+
+
+발효유 배치
+cycle 정보를 조회하여 해당 애음요일에 해당하는 일자를 계산
+daily 테이블에 데이터를 입력
+
+reader		: cycle 테이블의 정보 조회
+processor	: 애음요일을 실제 일자로 바꾸는 작업(1--->4~6)
+writer		: daily 테이블에 정보 저장
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
